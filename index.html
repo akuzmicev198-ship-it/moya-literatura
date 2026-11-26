@@ -1,0 +1,1267 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Моя литература</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --blue: #2476bd;
+    --dark-blue: #174b78;
+    --light-blue: #eaf4fc;
+    --text: #243447;
+    --muted: #718096;
+    --background: #f5f8fc;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--background);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+header {
+    background: white;
+    padding: 14px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    box-shadow: 0 2px 12px #0000000c;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.logo {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
+.brand-name {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--dark-blue);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+nav button {
+    border: none;
+    background: none;
+    color: var(--text);
+    font-size: 15px;
+    cursor: pointer;
+}
+
+nav button:hover {
+    color: var(--blue);
+}
+
+main {
+    max-width: 1200px;
+    margin: auto;
+    padding: 35px 22px 70px;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.hero {
+    background: linear-gradient(120deg, #e8f4ff, #ffffff);
+    border-radius: 20px;
+    padding: 55px 30px;
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.hero h1 {
+    font-size: 38px;
+    color: var(--dark-blue);
+    margin-bottom: 12px;
+}
+
+.hero p {
+    color: var(--muted);
+    font-size: 17px;
+}
+
+.search-box {
+    max-width: 600px;
+    margin: 25px auto 0;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 15px 18px;
+    border: 1px solid #d6e3ef;
+    border-radius: 12px;
+    font-size: 16px;
+    outline: none;
+}
+
+.search-box input:focus {
+    border-color: var(--blue);
+}
+
+.section-title {
+    color: var(--dark-blue);
+    font-size: 25px;
+    margin: 35px 0 18px;
+}
+
+.author-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.author {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 3px 14px #0000000a;
+    transition: 0.2s;
+}
+
+.author:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 7px 20px #00000015;
+}
+
+.author img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    display: block;
+    background: #e5edf5;
+}
+
+.author h3 {
+    padding: 13px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.category-label {
+    display: inline-block;
+    background: var(--light-blue);
+    color: var(--dark-blue);
+    padding: 5px 11px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin: 4px;
+}
+
+.back-button, .primary-button {
+    border: none;
+    background: var(--blue);
+    color: white;
+    padding: 11px 18px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.back-button:hover, .primary-button:hover {
+    background: var(--dark-blue);
+}
+
+.author-profile {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 30px;
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    margin-top: 20px;
+}
+
+.author-profile img {
+    width: 100%;
+    max-height: 340px;
+    object-fit: cover;
+    border-radius: 12px;
+    background: #e5edf5;
+}
+
+.author-profile h1 {
+    color: var(--dark-blue);
+    margin-bottom: 5px;
+}
+
+.content-block {
+    background: white;
+    border-radius: 14px;
+    padding: 22px;
+    margin-top: 20px;
+}
+
+.content-block h2 {
+    color: var(--dark-blue);
+    margin-bottom: 12px;
+    margin-top: 12px;
+}
+
+.content-block p {
+    margin-bottom: 12px;
+}
+
+.work-list {
+    display: grid;
+    gap: 12px;
+}
+
+.work-item {
+    background: var(--light-blue);
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.work-item:hover {
+    background: #d9ebfa;
+}
+
+.work-item h3 {
+    color: var(--dark-blue);
+}
+
+.work-header {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.work-header h1 {
+    color: var(--dark-blue);
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.tab {
+    border: 1px solid #cbdceb;
+    background: white;
+    padding: 10px 15px;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+.tab.active {
+    background: var(--blue);
+    color: white;
+    border-color: var(--blue);
+}
+
+.favorite-button {
+    border: none;
+    background: #fff1f1;
+    color: #c0394b;
+    padding: 10px 15px;
+    border-radius: 9px;
+    cursor: pointer;
+    margin-top: 12px;
+}
+
+.favorite-button.saved {
+    background: #ffe0e0;
+}
+
+.empty {
+    color: var(--muted);
+    padding: 20px 0;
+}
+
+footer {
+    background: white;
+    text-align: center;
+    padding: 25px;
+    color: var(--muted);
+}
+
+.chat-box {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    max-width: 750px;
+    margin: 20px auto;
+}
+
+.chat-messages {
+    min-height: 180px;
+    max-height: 350px;
+    overflow-y: auto;
+    background: #f5f8fc;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.message {
+    padding: 10px 13px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    max-width: 90%;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.message.bot {
+    background: #e6f2fc;
+}
+
+.message.user {
+    background: #d9edff;
+    margin-left: auto;
+}
+
+.chat-form {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-form input {
+    flex: 1;
+    min-width: 0;
+    padding: 12px;
+    border: 1px solid #ccd9e5;
+    border-radius: 9px;
+    font-size: 15px;
+}
+
+@media (max-width: 650px) {
+    header {
+        flex-direction: column;
+    }
+
+    nav {
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .author-profile {
+        grid-template-columns: 1fr;
+    }
+
+    .author-profile img {
+        max-width: 260px;
+    }
+
+    .chat-form {
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="brand" onclick="showPage('home')">
+        <img src="logo.png" class="logo" alt="Логотип">
+        <div class="brand-name">Моя литература</div>
+    </div>
+
+    <nav>
+        <button onclick="showPage('home')">Главная</button>
+        <button onclick="showPage('favorites')">Избранное ♥</button>
+        <button onclick="showPage('assistant')">Литера</button>
+        <button onclick="showPage('about')">О проекте</button>
+    </nav>
+</header>
+
+<main>
+
+<section id="home" class="page active">
+    <div class="hero">
+        <h1>Открой мир литературы</h1>
+        <p>Изучай писателей, знакомься с произведениями и открывай новые истории.</p>
+
+        <div class="search-box">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Найти автора или произведение..."
+                oninput="searchAuthors()"
+            >
+        </div>
+    </div>
+
+    <div id="categorySections">
+        <h2 class="section-title">Русская литература</h2>
+        <div class="author-grid" id="russianAuthors"></div>
+
+        <h2 class="section-title">Зарубежная литература</h2>
+        <div class="author-grid" id="foreignAuthors"></div>
+
+        <h2 class="section-title">Детская литература</h2>
+        <div class="author-grid" id="childrenAuthors"></div>
+    </div>
+
+    <div id="searchSection" style="display:none">
+        <h2 class="section-title">Результаты поиска</h2>
+        <div class="author-grid" id="searchResults"></div>
+        <p class="empty" id="noResults" style="display:none">Ничего не найдено.</p>
+    </div>
+</section>
+
+<section id="authorPage" class="page">
+    <button class="back-button" onclick="showPage('home')">← Назад</button>
+    <div id="authorContent"></div>
+</section>
+
+<section id="workPage" class="page">
+    <button class="back-button" onclick="showPage('authorPage')">← К автору</button>
+    <div id="workContent"></div>
+</section>
+
+<section id="favorites" class="page">
+    <h1 class="section-title">Избранное ♥</h1>
+    <div id="favoritesContent"></div>
+</section>
+
+<section id="about" class="page">
+    <div class="content-block">
+        <h1>О проекте «Моя литература»</h1>
+        <p>
+            «Моя литература» — образовательный сайт, созданный для знакомства
+            с русской и зарубежной литературой.
+        </p>
+        <p>
+            Здесь можно узнать о жизни известных писателей, познакомиться
+            с их произведениями, прочитать пересказы и изучить основные
+            литературные темы.
+        </p>
+        <p>
+            Материалы сайта предназначены для помощи школьникам в изучении
+            литературы и подготовке к занятиям.
+        </p>
+        <p>
+            На сайте также есть раздел избранного и помощник «Литера».
+        </p>
+    </div>
+</section>
+
+<section id="assistant" class="page">
+    <div class="content-block">
+        <h1>Литера — помощник по литературе</h1>
+        <p>Задай вопрос о писателях и произведениях.</p>
+    </div>
+
+    <div class="chat-box">
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot">
+                Привет! Я Литера. Могу помочь найти информацию об авторах
+                и произведениях из каталога сайта.
+            </div>
+        </div>
+
+        <div class="chat-form">
+            <input id="chatInput" type="text" placeholder="Напиши свой вопрос...">
+            <button class="primary-button" onclick="sendMessage()">Отправить</button>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    © 2026 Моя литература
+</footer>
+
+<script>
+
+// ДАННЫЕ АВТОРОВ
+
+const authors = [
+    {
+        id: 1,
+        name: "Александр Пушкин",
+        years: "1799–1837",
+        photo: "images/pushkin.jpg",
+        categories: ["Русская литература"],
+        bio: "Александр Сергеевич Пушкин — великий русский поэт, прозаик и драматург. Его творчество оказало огромное влияние на развитие русской литературы.",
+        facts: [
+            "Пушкин считается основоположником современного русского литературного языка.",
+            "Он написал роман в стихах «Евгений Онегин».",
+            "Многие его произведения стали классикой русской литературы."
+        ],
+        works: [
+            {
+                title: "Капитанская дочка",
+                year: "1836",
+                short: "Роман рассказывает о молодом дворянине Петре Гринёве, который отправляется служить в крепость. Там он знакомится с Машей Мироновой и оказывается участником событий крестьянского восстания под руководством Емельяна Пугачёва. Гринёв проходит через испытания, сталкивается с опасностью и должен сделать непростой нравственный выбор. История показывает значение чести, верности и человеческого достоинства.",
+                full: "Пётр Гринёв вспоминает свою молодость. По решению отца он отправляется на военную службу. По дороге герой встречает незнакомого человека, которому помогает во время бурана. Позже выясняется, что это был Емельян Пугачёв. Гринёв прибывает в Белогорскую крепость, знакомится с её комендантом и его дочерью Машей. Между молодыми людьми возникают чувства. Однако вскоре крепость оказывается захвачена восставшими. Гринёв отказывается присягать Пугачёву, но тот узнаёт в нём человека, оказавшего ему помощь в дороге, и сохраняет ему жизнь. В дальнейшем герой пытается спасти Машу и доказать её невиновность. В центре произведения — испытание чести, долга и верности.",
+                characters: "Пётр Гринёв — честный и смелый молодой дворянин. Маша Миронова — добрая и решительная девушка. Емельян Пугачёв — предводитель восстания. Швабрин — офицер, поступающий нечестно.",
+                theme: "Честь, долг, любовь, верность и нравственный выбор.",
+                idea: "Человек должен оставаться верным своим принципам даже в трудных обстоятельствах.",
+                problems: "Честь и бесчестие, верность и предательство, ответственность за поступки."
+            }
+        ]
+    },
+
+    {
+        id: 2,
+        name: "Лев Толстой",
+        years: "1828–1910",
+        photo: "images/tolstoy.jpg",
+        categories: ["Русская литература"],
+        bio: "Лев Николаевич Толстой — русский писатель и мыслитель, один из крупнейших авторов мировой литературы.",
+        facts: [
+            "Толстой написал романы «Война и мир» и «Анна Каренина».",
+            "Он основал школу для крестьянских детей в Ясной Поляне.",
+            "Его произведения переведены на многие языки."
+        ],
+        works: [
+            {
+                title: "Кавказский пленник",
+                year: "1872",
+                short: "Офицер Жилин попадает в плен к горцам во время службы на Кавказе. Вместе с ним пленником становится Костылин. Жилин не теряет надежды на спасение и старается выбраться из плена. Ему помогает девочка Дина, которая относится к нему с добротой. Произведение рассказывает о смелости, дружбе и силе характера.",
+                full: "Офицер Жилин получает письмо от матери и отправляется домой. По дороге он вместе с Костылиным оказывается в опасной ситуации и попадает в плен. Пленники живут в ауле и надеются на выкуп. Жилин старается не унывать: он мастерит игрушки, помогает окружающим и изучает местность. Костылин, напротив, почти ничего не предпринимает. Девочка Дина привязывается к Жилину и приносит ему еду. Герой предпринимает попытку побега, но она оказывается неудачной. Позже Дина помогает ему выбраться снова. Жилин добирается до русской крепости, а Костылин остаётся ждать выкупа.",
+                characters: "Жилин — смелый, находчивый и трудолюбивый офицер. Костылин — менее решительный пленник. Дина — добрая и отзывчивая девочка.",
+                theme: "Мужество, дружба, свобода и взаимопомощь.",
+                idea: "Сила духа и доброта помогают человеку преодолевать трудности.",
+                problems: "Смелость и трусость, взаимопомощь, отношение к другим людям."
+            }
+        ]
+    },
+
+    {
+        id: 3,
+        name: "Антон Чехов",
+        years: "1860–1904",
+        photo: "images/chekhov.jpg",
+        categories: ["Русская литература"],
+        bio: "Антон Павлович Чехов — русский писатель, драматург и врач. Он прославился рассказами, в которых с юмором и вниманием к деталям показывал жизнь людей.",
+        facts: [
+            "Чехов был врачом по образованию.",
+            "Он написал пьесы «Чайка» и «Вишнёвый сад».",
+            "Его рассказы часто построены на коротких, выразительных сценах."
+        ],
+        works: [
+            {
+                title: "Хамелеон",
+                year: "1884",
+                short: "Полицейский надзиратель Очумелов разбирается в происшествии: собака укусила человека. В зависимости от того, кому принадлежит собака, он постоянно меняет своё мнение. Рассказ высмеивает угодничество, чинопочитание и отсутствие собственного достоинства.",
+                full: "На базарной площади происходит шум: золотых дел мастер Хрюкин жалуется, что его укусила собака. Полицейский надзиратель Очумелов начинает разбираться в случившемся. Он то требует наказать владельца собаки, то меняет решение, когда слышит предположения, что животное может принадлежать важному человеку. Очумелов несколько раз меняет своё отношение к ситуации. В конце выясняется, что собака связана с генералом. Надзиратель становится к ней доброжелателен, а Хрюкина высмеивают. Чехов показывает, как поведение человека может зависеть от положения окружающих.",
+                characters: "Очумелов — полицейский надзиратель, меняющий мнение. Хрюкин — золотых дел мастер. Елдырин — городовой.",
+                theme: "Чинопочитание, угодничество и несправедливость.",
+                idea: "Нельзя оценивать людей и поступки по их положению в обществе.",
+                problems: "Лицемерие, зависимость от власти, отсутствие принципов."
+            }
+        ]
+    },
+
+    {
+        id: 4,
+        name: "Николай Гоголь",
+        years: "1809–1852",
+        photo: "images/gogol.jpg",
+        categories: ["Русская литература"],
+        bio: "Николай Васильевич Гоголь — русский писатель, драматург и публицист. В своих произведениях он сочетал юмор, сатиру и глубокие размышления о жизни общества.",
+        facts: [
+            "Гоголь написал комедию «Ревизор».",
+            "Его произведение «Мёртвые души» стало одним из главных произведений русской классики.",
+            "Писатель родился на территории современной Украины."
+        ],
+        works: [
+            {
+                title: "Шинель",
+                year: "1842",
+                short: "Главный герой повести — бедный чиновник Акакий Акакиевич Башмачкин. Его старая шинель приходит в негодность, и он долго копит деньги на новую. Покупка становится для него важным событием, но вскоре шинель похищают. Попытки добиться справедливости заканчиваются неудачей. Повесть рассказывает о равнодушии общества к маленькому человеку.",
+                full: "Акакий Акакиевич Башмачкин служит переписчиком бумаг и ведёт очень скромную жизнь. Его старая шинель настолько изношена, что портной отказывается её чинить. Герой начинает экономить и постепенно собирает деньги на новую вещь. Покупка шинели приносит ему радость и меняет отношение окружающих. Однако вскоре шинель похищают. Башмачкин обращается за помощью, но сталкивается с равнодушием и грубостью. После неприятного разговора с важным лицом его здоровье ухудшается. История раскрывает тему человеческого достоинства и безразличия общества.",
+                characters: "Акакий Акакиевич — скромный чиновник. Петрович — портной. Значительное лицо — чиновник, проявивший грубость.",
+                theme: "Положение маленького человека в обществе.",
+                idea: "Каждый человек заслуживает уважения и сочувствия.",
+                problems: "Социальное неравенство, равнодушие, унижение человеческого достоинства."
+            }
+        ]
+    },
+
+    {
+        id: 5,
+        name: "Михаил Лермонтов",
+        years: "1814–1841",
+        photo: "images/lermontov.jpg",
+        categories: ["Русская литература"],
+        bio: "Михаил Юрьевич Лермонтов — русский поэт, прозаик и драматург. Его творчество связано с темами свободы, одиночества и внутреннего мира человека.",
+        facts: [
+            "Лермонтов написал роман «Герой нашего времени».",
+            "Он был талантливым художником.",
+            "Поэт погиб на дуэли в возрасте 26 лет."
+        ],
+        works: [
+            {
+                title: "Мцыри",
+                year: "1839",
+                short: "Юный послушник, выросший в монастыре, мечтает о свободе и родине. Однажды он убегает и проводит несколько дней на воле. За это время герой переживает сильные чувства, встречает опасности и понимает, насколько сильно хочет жить свободной жизнью.",
+                full: "Мцыри ещё ребёнком оказался в монастыре, где его воспитывали монахи. Он не чувствует себя частью этого мира и тоскует по родине и семье. Однажды во время грозы герой исчезает из монастыря. Три дня он проводит на свободе: любуется природой, встречает опасности и вступает в схватку с барсом. В конце концов Мцыри возвращается к монастырю, обессиленный и измученный. Перед смертью он рассказывает о пережитом. Для него даже короткое время свободы оказывается важнее долгих лет спокойной жизни в заточении.",
+                characters: "Мцыри — юноша, мечтающий о свободе. Монахи — люди, воспитавшие героя в монастыре.",
+                theme: "Свобода, родина, одиночество и борьба за мечту.",
+                idea: "Свобода и возможность жить по своему выбору имеют огромную ценность.",
+                problems: "Несвобода, конфликт личности и общества, поиск своего места в мире."
+            }
+        ]
+    },
+
+    {
+        id: 6,
+        name: "Николай Носов",
+        years: "1908–1976",
+        photo: "images/nosov.jpg",
+        categories: ["Русская литература", "Детская литература"],
+        bio: "Николай Николаевич Носов — советский детский писатель, известный весёлыми и поучительными рассказами о детях.",
+        facts: [
+            "Носов создал цикл произведений о Незнайке.",
+            "Его рассказы часто посвящены школьной жизни и дружбе.",
+            "По профессии он также был режиссёром и сценаристом."
+        ],
+        works: [
+            {
+                title: "Фантазёры",
+                year: "1940-е годы",
+                short: "Два мальчика любят придумывать необычные истории и соревнуются в фантазии. Они рассказывают друг другу невероятные выдумки, но вскоре встречают человека, который пытается выдать обман за правду. Рассказ помогает понять разницу между безобидной фантазией и настоящей ложью.",
+                full: "Два мальчика обсуждают свои фантазии и придумывают невероятные истории. Их выдумки становятся всё интереснее и смешнее. Они понимают, что фантазировать можно ради игры и развлечения. Но затем появляется человек, который рассказывает неправдоподобную историю так, будто это правда. Мальчики замечают разницу между фантазией и обманом. Произведение показывает, что воображение делает жизнь интереснее, но обманывать людей нехорошо.",
+                characters: "Мишутка и Стасик — мальчики с богатым воображением. Игорь — герой, связанный с историей о настоящем обмане.",
+                theme: "Фантазия, честность и детская дружба.",
+                idea: "Фантазировать интересно, но нельзя выдавать ложь за правду ради обмана.",
+                problems: "Честность, ответственность за слова, различие между выдумкой и обманом."
+            }
+        ]
+    },
+
+    {
+        id: 7,
+        name: "Корней Чуковский",
+        years: "1882–1969",
+        photo: "images/chukovsky.jpg",
+        categories: ["Русская литература", "Детская литература"],
+        bio: "Корней Иванович Чуковский — русский и советский детский писатель, поэт, переводчик и литературовед.",
+        facts: [
+            "Он написал сказки «Мойдодыр» и «Айболит».",
+            "Чуковский много лет занимался переводами.",
+            "Его произведения отличаются ритмом, юмором и запоминающимися героями."
+        ],
+        works: [
+            {
+                title: "Мойдодыр",
+                year: "1923",
+                short: "В стихотворной сказке мальчик не любит умываться и следить за чистотой. Вещи начинают убегать от него, а затем появляется Мойдодыр, который объясняет важность чистоты. История в весёлой форме напоминает детям о гигиене и аккуратности.",
+                full: "Мальчик просыпается и не хочет умываться. Вскоре окружающие предметы начинают вести себя необычно: от него убегают вещи. Появляется Мойдодыр — необычный персонаж, который требует от мальчика соблюдать чистоту. Герой узнаёт, что грязь и неряшливость могут привести к неприятностям. В итоге мальчик меняет своё отношение к умыванию и становится аккуратнее.",
+                characters: "Мойдодыр — строгий защитник чистоты. Мальчик — герой, которому предстоит научиться аккуратности.",
+                theme: "Чистота и личная гигиена.",
+                idea: "Важно заботиться о чистоте и своём здоровье.",
+                problems: "Неряшливость, ответственность за себя, привычки."
+            }
+        ]
+    },
+
+    {
+        id: 8,
+        name: "Астрид Линдгрен",
+        years: "1907–2002",
+        photo: "images/lindgren.jpg",
+        categories: ["Зарубежная литература", "Детская литература"],
+        bio: "Астрид Линдгрен — шведская писательница, создавшая множество известных книг для детей.",
+        facts: [
+            "Она является автором истории о Карлсоне.",
+            "Её книги переведены на десятки языков.",
+            "Писательница получила международное признание за вклад в детскую литературу."
+        ],
+        works: [
+            {
+                title: "Малыш и Карлсон",
+                year: "1955",
+                short: "Мальчик по прозвищу Малыш знакомится с необычным Карлсоном, который живёт на крыше. Карлсон становится его другом, и вместе они попадают в забавные ситуации. История рассказывает о дружбе, воображении и детском мире.",
+                full: "Малыш — младший ребёнок в семье, которому иногда не хватает внимания. Однажды он знакомится с Карлсоном — маленьким человечком с пропеллером за спиной, живущим на крыше. Карлсон называет себя лучшим в мире специалистом по многим делам. Вместе герои проводят время, играют и попадают в различные приключения. Их дружба помогает Малышу справляться с одиночеством. Книга наполнена юмором и показывает важность общения и фантазии.",
+                characters: "Малыш — добрый и мечтательный мальчик. Карлсон — весёлый и самоуверенный человечек с пропеллером.",
+                theme: "Дружба, детство и воображение.",
+                idea: "Дружба и поддержка делают жизнь радостнее.",
+                problems: "Одиночество, взаимопонимание, ответственность."
+            }
+        ]
+    },
+
+    {
+        id: 9,
+        name: "Марк Твен",
+        years: "1835–1910",
+        photo: "images/twain.jpg",
+        categories: ["Зарубежная литература"],
+        bio: "Марк Твен — американский писатель, журналист и юморист. Он известен произведениями о приключениях и взрослении детей.",
+        facts: [
+            "Настоящее имя писателя — Сэмюэл Клеменс.",
+            "Он работал журналистом.",
+            "Его книги о Томе Сойере и Гекльберри Финне стали известны во всём мире."
+        ],
+        works: [
+            {
+                title: "Приключения Тома Сойера",
+                year: "1876",
+                short: "Том Сойер — озорной мальчик, который живёт в небольшом американском городке. Он постоянно придумывает приключения, дружит с Гекльберри Финном и оказывается свидетелем опасных событий. Книга рассказывает о детстве, дружбе, смелости и взрослении.",
+                full: "Том Сойер живёт вместе с тётей Полли и часто попадает в неприятности из-за своего озорного характера. Он знакомится с Бекки Тэтчер, дружит с Геком Финном и вместе с ним отправляется навстречу приключениям. Однажды мальчики становятся свидетелями преступления и оказываются перед сложным выбором. Том проявляет смелость и помогает восстановить справедливость. В ходе событий герои учатся отвечать за свои поступки и ценить дружбу.",
+                characters: "Том Сойер — любознательный и озорной мальчик. Гекльберри Финн — его друг. Бекки Тэтчер — подруга Тома. Тётя Полли — заботится о Томе.",
+                theme: "Детство, дружба, приключения и взросление.",
+                idea: "Смелость и честность помогают поступать правильно.",
+                problems: "Ответственность, дружба, справедливость, взросление."
+            }
+        ]
+    },
+
+    {
+        id: 10,
+        name: "Жюль Верн",
+        years: "1828–1905",
+        photo: "images/verne.jpg",
+        categories: ["Зарубежная литература"],
+        bio: "Жюль Верн — французский писатель, один из основателей научно-фантастической литературы и автор приключенческих романов.",
+        facts: [
+            "Он написал «Путешествие к центру Земли».",
+            "Его книги посвящены науке, открытиям и путешествиям.",
+            "Многие идеи писателя позднее стали реальностью."
+        ],
+        works: [
+            {
+                title: "Двадцать тысяч лье под водой",
+                year: "1870",
+                short: "Профессор Аронакс, его слуга Консель и гарпунщик Нед Ленд оказываются на подводной лодке «Наутилус». Ею управляет капитан Немо. Герои путешествуют по океанам и открывают удивительный подводный мир. Книга рассказывает о науке, свободе и приключениях.",
+                full: "После сообщений о загадочном морском существе начинается экспедиция. Профессор Аронакс, Консель и Нед Ленд оказываются на борту необычной подводной лодки «Наутилус». Ею управляет капитан Немо, который не желает возвращаться к обычной жизни. Путешественники исследуют океаны, наблюдают за морскими животными и сталкиваются с опасностями. Со временем герои начинают задумываться о том, как покинуть лодку. Их путешествие становится рассказом о научных открытиях и человеческой свободе.",
+                characters: "Профессор Аронакс — учёный. Консель — его помощник. Нед Ленд — опытный гарпунщик. Капитан Немо — загадочный командир «Наутилуса».",
+                theme: "Наука, исследование мира, свобода и приключения.",
+                idea: "Знания открывают человеку новые возможности, но свобода остаётся важной ценностью.",
+                problems: "Научный прогресс, одиночество, свобода и ответственность."
+            }
+        ]
+    },
+
+    {
+        id: 11,
+        name: "Антуан де Сент-Экзюпери",
+        years: "1900–1944",
+        photo: "images/exupery.jpg",
+        categories: ["Зарубежная литература"],
+        bio: "Антуан де Сент-Экзюпери — французский писатель и лётчик. Его самая известная книга — философская сказка «Маленький принц».",
+        facts: [
+            "Сент-Экзюпери работал пилотом.",
+            "«Маленький принц» впервые вышел в 1943 году.",
+            "Писатель сам создал иллюстрации к книге."
+        ],
+        works: [
+            {
+                title: "Маленький принц",
+                year: "1943",
+                short: "Лётчик встречает в пустыне необычного мальчика с другой планеты. Маленький принц рассказывает о своём путешествии, знакомстве с разными персонажами и любимой розе. Герои размышляют о дружбе, любви, ответственности и важных вещах, которые не всегда заметны с первого взгляда.",
+                full: "Лётчик совершает вынужденную посадку в пустыне и встречает Маленького принца. Мальчик рассказывает о своей маленькой планете, розе и путешествии по другим астероидам. На своём пути он встречает короля, честолюбца, пьяницу, делового человека и фонарщика. На Земле Маленький принц знакомится с Лисом, который помогает ему понять смысл дружбы и привязанности. Постепенно герой осознаёт, почему его роза так важна для него. Книга предлагает задуматься о любви, ответственности и ценности человеческих отношений.",
+                characters: "Маленький принц — любознательный мальчик. Лётчик — рассказчик. Роза — дорогой для принца цветок. Лис — помогает герою понять дружбу.",
+                theme: "Дружба, любовь, ответственность и духовные ценности.",
+                idea: "Самое важное нельзя оценить только внешним взглядом.",
+                problems: "Одиночество, ответственность, привязанность, смысл жизни."
+            }
+        ]
+    },
+
+    {
+        id: 12,
+        name: "Даниэль Дефо",
+        years: "1660–1731",
+        photo: "images/defoe.jpg",
+        categories: ["Зарубежная литература"],
+        bio: "Даниэль Дефо — английский писатель и публицист, автор знаменитого приключенческого романа о Робинзоне Крузо.",
+        facts: [
+            "Дефо считается одним из основателей английского реалистического романа.",
+            "«Робинзон Крузо» был опубликован в 1719 году.",
+            "Писатель занимался журналистикой и политической публицистикой."
+        ],
+        works: [
+            {
+                title: "Робинзон Крузо",
+                year: "1719",
+                short: "Моряк Робинзон Крузо после кораблекрушения оказывается один на необитаемом острове. Он учится добывать пищу, строить жилище и приспосабливаться к новым условиям. Благодаря терпению и труду герой выживает и постепенно обустраивает свою жизнь.",
+                full: "Робинзон Крузо с юности мечтает о морских путешествиях. Во время одного из плаваний происходит кораблекрушение, и он оказывается единственным выжившим. Герой переносит на остров полезные вещи с корабля, строит жилище, учится выращивать растения и разводить животных. Он ведёт записи о своих делах и постепенно приспосабливается к жизни вдали от людей. Позже Робинзон встречает Пятницу, которому помогает. Их отношения становятся важной частью дальнейшей истории. Роман показывает, как труд, знания и настойчивость помогают человеку преодолевать испытания.",
+                characters: "Робинзон Крузо — трудолюбивый и находчивый моряк. Пятница — человек, с которым Робинзон знакомится на острове.",
+                theme: "Выживание, труд, самостоятельность и сила человеческого характера.",
+                idea: "Трудолюбие, знания и настойчивость помогают преодолевать трудности.",
+                problems: "Одиночество, ответственность, приспособление к новым условиям."
+            }
+        ]
+    }
+];
+
+
+// ПЕРЕМЕННЫЕ САЙТА
+
+let currentAuthor = null;
+let currentWork = null;
+let currentTab = "short";
+
+
+// ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ
+
+function showPage(pageId) {
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.remove("active");
+    });
+
+    const page = document.getElementById(pageId);
+
+    if (page) {
+        page.classList.add("active");
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    if (pageId === "favorites") {
+        renderFavorites();
+    }
+}
+
+
+// КАРТОЧКА АВТОРА
+
+function authorCard(author) {
+    return `
+        <div class="author" onclick="openAuthor(${author.id})">
+            <img
+                src="${author.photo}"
+                alt="${author.name}"
+                onerror="this.alt='Фотография не найдена'; this.style.objectFit='contain'"
+            >
+            <h3>${author.name}</h3>
+        </div>
+    `;
+}
+
+
+// ОТОБРАЖЕНИЕ АВТОРОВ
+
+function renderAuthors() {
+    document.getElementById("russianAuthors").innerHTML =
+        authors.filter(a => a.categories.includes("Русская литература"))
+        .map(authorCard).join("");
+
+    document.getElementById("foreignAuthors").innerHTML =
+        authors.filter(a => a.categories.includes("Зарубежная литература"))
+        .map(authorCard).join("");
+
+    document.getElementById("childrenAuthors").innerHTML =
+        authors.filter(a => a.categories.includes("Детская литература"))
+        .map(authorCard).join("");
+}
+
+
+// ПОИСК
+
+function searchAuthors() {
+    const query = document.getElementById("searchInput")
+        .value.trim().toLowerCase();
+
+    const categorySections =
+        document.getElementById("categorySections");
+
+    const searchSection =
+        document.getElementById("searchSection");
+
+    if (!query) {
+        categorySections.style.display = "block";
+        searchSection.style.display = "none";
+        return;
+    }
+
+    categorySections.style.display = "none";
+    searchSection.style.display = "block";
+
+    const results = authors.filter(author => {
+        const authorMatch =
+            author.name.toLowerCase().includes(query);
+
+        const workMatch = author.works.some(work =>
+            work.title.toLowerCase().includes(query)
+        );
+
+        return authorMatch || workMatch;
+    });
+
+    document.getElementById("searchResults").innerHTML =
+        results.map(authorCard).join("");
+
+    document.getElementById("noResults").style.display =
+        results.length ? "none" : "block";
+}
+
+
+// СТРАНИЦА АВТОРА
+
+function openAuthor(id) {
+    currentAuthor = authors.find(author => author.id === id);
+
+    if (!currentAuthor) return;
+
+    const facts = currentAuthor.facts
+        .map(fact => `<li>${fact}</li>`)
+        .join("");
+
+    const works = currentAuthor.works.map((work, index) => `
+        <div class="work-item"
+             onclick="openWork(${currentAuthor.id}, ${index})">
+            <h3>${work.title}</h3>
+            <p>${work.year}</p>
+        </div>
+    `).join("");
+
+    document.getElementById("authorContent").innerHTML = `
+        <div class="author-profile">
+            <img
+                src="${currentAuthor.photo}"
+                alt="${currentAuthor.name}"
+                onerror="this.alt='Фотография не найдена'; this.style.objectFit='contain'"
+            >
+
+            <div>
+                <h1>${currentAuthor.name}</h1>
+                <p>${currentAuthor.years}</p>
+                <p>${currentAuthor.bio}</p>
+
+                <div>
+                    ${currentAuthor.categories.map(c =>
+                        `<span class="category-label">${c}</span>`
+                    ).join("")}
+                </div>
+            </div>
+        </div>
+
+        <div class="content-block">
+            <h2>Интересные факты</h2>
+            <ul>${facts}</ul>
+        </div>
+
+        <div class="content-block">
+            <h2>Произведения</h2>
+            <div class="work-list">${works}</div>
+        </div>
+    `;
+
+    showPage("authorPage");
+}
+
+
+// СТРАНИЦА ПРОИЗВЕДЕНИЯ
+
+function openWork(authorId, workIndex) {
+    currentAuthor = authors.find(author => author.id === authorId);
+
+    if (!currentAuthor) return;
+
+    currentWork = currentAuthor.works[workIndex];
+
+    if (!currentWork) return;
+
+    currentTab = "short";
+
+    renderWork();
+    showPage("workPage");
+}
+
+
+// ПРОВЕРКА ИЗБРАННОГО
+
+function isFavorite() {
+    const favorites =
+        JSON.parse(localStorage.getItem("favorites") || "[]");
+
+    return favorites.some(item =>
+        item.authorId === currentAuthor.id &&
+        item.workTitle === currentWork.title
+    );
+}
+
+
+// ДОБАВЛЕНИЕ И УДАЛЕНИЕ ИЗБРАННОГО
+
+function toggleFavorite() {
+    let favorites =
+        JSON.parse(localStorage.getItem("favorites") || "[]");
+
+    if (isFavorite()) {
+        favorites = favorites.filter(item =>
+            !(item.authorId === currentAuthor.id &&
+              item.workTitle === currentWork.title)
+        );
+    } else {
+        favorites.push({
+            authorId: currentAuthor.id,
+            workTitle: currentWork.title
+        });
+    }
+
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+
+    renderWork();
+}
+
+
+// ОТОБРАЖЕНИЕ ПРОИЗВЕДЕНИЯ
+
+function renderWork() {
+    const favorite = isFavorite();
+
+    let content = "";
+
+    if (currentTab === "short") {
+        content = `<p>${currentWork.short}</p>`;
+    }
+
+    if (currentTab === "full") {
+        content = `<p>${currentWork.full}</p>`;
+    }
+
+    if (currentTab === "analysis") {
+        content = `
+            <h2>Герои и характеристики</h2>
+            <p>${currentWork.characters}</p>
+
+            <h2>Тема</h2>
+            <p>${currentWork.theme}</p>
+
+            <h2>Главная мысль</h2>
+            <p>${currentWork.idea}</p>
+
+            <h2>Проблематика</h2>
+            <p>${currentWork.problems}</p>
+        `;
+    }
+
+    document.getElementById("workContent").innerHTML = `
+        <div class="work-header">
+            <h1>${currentWork.title}</h1>
+            <p>Автор: ${currentAuthor.name}</p>
+            <p>Год: ${currentWork.year}</p>
+
+            <button class="favorite-button ${favorite ? "saved" : ""}"
+                    onclick="toggleFavorite()">
+                ${favorite ? "♥ В избранном" : "♡ Добавить в избранное"}
+            </button>
+        </div>
+
+        <div class="tabs">
+            <button class="tab ${currentTab === "short" ? "active" : ""}"
+                    onclick="changeTab('short')">
+                Краткий пересказ
+            </button>
+
+            <button class="tab ${currentTab === "full" ? "active" : ""}"
+                    onclick="changeTab('full')">
+                Полный пересказ
+            </button>
+
+            <button class="tab ${currentTab === "analysis" ? "active" : ""}"
+                    onclick="changeTab('analysis')">
+                Анализ
+            </button>
+        </div>
+
+        <div class="content-block">${content}</div>
+    `;
+}
+
+
+// ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
+
+function changeTab(tab) {
+    currentTab = tab;
+    renderWork();
+}
+
+
+// СТРАНИЦА ИЗБРАННОГО
+
+function renderFavorites() {
+    const favorites =
+        JSON.parse(localStorage.getItem("favorites") || "[]");
+
+    if (!favorites.length) {
+        document.getElementById("favoritesContent").innerHTML =
+            '<p class="empty">Пока здесь ничего нет. Добавляй произведения в избранное!</p>';
+        return;
+    }
+
+    document.getElementById("favoritesContent").innerHTML =
+        favorites.map(item => {
+            const author = authors.find(a => a.id === item.authorId);
+
+            if (!author) return "";
+
+            const workIndex = author.works.findIndex(
+                w => w.title === item.workTitle
+            );
+
+            if (workIndex < 0) return "";
+
+            return `
+                <div class="work-item"
+                     onclick="openWork(${author.id}, ${workIndex})">
+                    <h3>${item.workTitle}</h3>
+                    <p>${author.name}</p>
+                </div>
+            `;
+        }).join("");
+}
+
+
+// ЗАЩИТА ТЕКСТА В ЧАТЕ
+
+function escapeHTML(text) {
+    return text.replace(/[&<>"']/g, character => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+    })[character]);
+}
+
+
+// ОТПРАВКА СООБЩЕНИЯ
+
+function sendMessage() {
+    const input = document.getElementById("chatInput");
+    const messageText = input.value.trim();
+
+    if (!messageText) return;
+
+    const messages = document.getElementById("chatMessages");
+
+    messages.innerHTML += `
+        <div class="message user">${escapeHTML(messageText)}</div>
+    `;
+
+    input.value = "";
+
+    const answer = getBotAnswer(messageText);
+
+    messages.innerHTML += `
+        <div class="message bot">${escapeHTML(answer)}</div>
+    `;
+
+    messages.scrollTop = messages.scrollHeight;
+}
+
+
+// ОТВЕТЫ ПОМОЩНИКА «ЛИТЕРА»
+
+function getBotAnswer(question) {
+    const q = question.toLowerCase();
+
+    if (q.includes("привет")) {
+        return "Привет! Я Литера. Могу помочь тебе с литературой.";
+    }
+
+    if (q.includes("пушкин")) {
+        return "Александр Сергеевич Пушкин — великий русский поэт. На сайте есть его произведение «Капитанская дочка».";
+    }
+
+    if (q.includes("толстой")) {
+        return "Лев Николаевич Толстой — русский писатель, автор «Войны и мира». На сайте можно прочитать о рассказе «Кавказский пленник».";
+    }
+
+    if (q.includes("чехов")) {
+        return "Антон Павлович Чехов — русский писатель и драматург. На сайте представлено его произведение «Хамелеон».";
+    }
+
+    if (q.includes("гоголь")) {
+        return "Николай Васильевич Гоголь — автор произведения «Шинель» и комедии «Ревизор».";
+    }
+
+    if (q.includes("мцыри") || q.includes("лермонтов")) {
+        return "Михаил Юрьевич Лермонтов — автор поэмы «Мцыри» и романа «Герой нашего времени».";
+    }
+
+    if (q.includes("нос") || q.includes("фантазёр")) {
+        return "Николай Носов — автор детских рассказов, в том числе «Фантазёров», и книг о Незнайке.";
+    }
+
+    if (q.includes("чук")) {
+        return "Корней Чуковский — автор детских произведений «Мойдодыр», «Айболит» и других сказок.";
+    }
+
+    if (q.includes("карлсон") || q.includes("линдгрен")) {
+        return "Астрид Линдгрен — шведская писательница, автор книги «Малыш и Карлсон».";
+    }
+
+    if (q.includes("том сойер") || q.includes("твен")) {
+        return "Марк Твен — американский писатель, автор «Приключений Тома Сойера».";
+    }
+
+    if (q.includes("верн") || q.includes("под водой")) {
+        return "Жюль Верн — французский писатель, автор приключенческого романа «Двадцать тысяч лье под водой».";
+    }
+
+    if (q.includes("маленький принц") || q.includes("экзюпери")) {
+        return "Антуан де Сент-Экзюпери — французский писатель и лётчик, автор «Маленького принца».";
+    }
+
+    if (q.includes("робинзон") || q.includes("дефо")) {
+        return "Даниэль Дефо — английский писатель, автор романа «Робинзон Крузо».";
+    }
+
+    if (q.includes("список") || q.includes("автор")) {
+        return "На главной странице сайта представлены 12 авторов. Ты можешь найти их через поиск или выбрать нужную категорию.";
+    }
+
+    return "Я пока умею отвечать только на некоторые вопросы о писателях и произведениях из каталога. Попробуй указать имя автора или название книги.";
+}
+
+
+// ОТПРАВКА СООБЩЕНИЯ КЛАВИШЕЙ ENTER
+
+document.getElementById("chatInput").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        sendMessage();
+    }
+});
+
+
+// ЗАПУСК САЙТА
+
+renderAuthors();
+
+</script>
+
+</body>
+</html>
