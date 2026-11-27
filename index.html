@@ -1,46 +1,63 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta name="google-site-verification" content="F52y1g7IFc8tcWPvCw36VsMZCTKyFPneQ0qBqY9ADsg" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Моя литература</title>
+<meta name="google-site-verification" content="F52y1g7IFc8tcWPvCw36VsMZCTKyFPneQ0qBqY9ADsg">
+<meta name="theme-color" content="#f5faff">
+<title>Моя литература — Литера</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+:root {
+    --blue: #2479e8;
+    --dark: #17365f;
+    --muted: #63758d;
+    --pale: #eaf4ff;
+    --bg: #f5faff;
+    --white: #ffffff;
+    --border: #dce8f5;
+    --shadow: 0 4px 18px #e1eaf5;
 }
 
-:root {
-    --blue: #2476bd;
-    --dark-blue: #174b78;
-    --light-blue: #eaf4fc;
-    --text: #243447;
-    --muted: #718096;
-    --background: #f5f8fc;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
     font-family: Arial, sans-serif;
-    background: var(--background);
-    color: var(--text);
+    background: var(--bg);
+    color: #172b4d;
     line-height: 1.6;
 }
 
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* ШАПКА САЙТА */
+
 header {
-    background: white;
-    padding: 14px 7%;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: #ffffff;
+    padding: 12px 7%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    box-shadow: 0 2px 12px #0000000c;
-    position: sticky;
-    top: 0;
-    z-index: 10;
+    box-shadow: 0 2px 15px #dce8f5;
 }
 
 .brand {
@@ -48,43 +65,62 @@ header {
     align-items: center;
     gap: 12px;
     cursor: pointer;
+    flex-shrink: 0;
+    min-width: 0;
 }
 
 .logo {
-    width: 48px;
-    height: 48px;
+    width: 210px;
+    height: 66px;
+    max-width: 48vw;
     object-fit: contain;
+    object-position: left center;
 }
 
 .brand-name {
-    font-size: 22px;
-    font-weight: bold;
-    color: var(--dark-blue);
+    font-size: 21px;
+    font-weight: 800;
+    color: var(--dark);
+}
+
+.brand-name span {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    font-weight: 600;
 }
 
 nav {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 22px;
     flex-wrap: wrap;
 }
 
 nav button {
-    border: none;
-    background: none;
-    color: var(--text);
+    border: 0;
+    background: transparent;
+    color: #52657e;
+    padding: 9px 6px;
+    border-radius: 9px;
+    font-weight: 700;
     font-size: 15px;
-    cursor: pointer;
 }
 
-nav button:hover {
+nav button:hover,
+nav button.active {
     color: var(--blue);
 }
 
+/* ОСНОВНЫЕ СТРАНИЦЫ */
+
 main {
     max-width: 1200px;
+    width: 86%;
     margin: auto;
-    padding: 35px 22px 70px;
+    padding: 32px 0 70px;
+    min-height: 75vh;
 }
 
 .page {
@@ -95,277 +131,559 @@ main {
     display: block;
 }
 
+/* ГЛАВНЫЙ ЭКРАН */
+
 .hero {
-    background: linear-gradient(120deg, #e8f4ff, #ffffff);
-    border-radius: 20px;
-    padding: 55px 30px;
+    background: linear-gradient(125deg, #dceeff, #eef6ff);
+    border: 1px solid #e5eff8;
+    border-radius: 25px;
+    padding: 54px 28px;
     text-align: center;
-    margin-bottom: 35px;
+    margin-bottom: 32px;
 }
 
 .hero h1 {
-    font-size: 38px;
-    color: var(--dark-blue);
-    margin-bottom: 12px;
+    font-size: clamp(28px, 5vw, 40px);
+    color: #1558a8;
+    line-height: 1.2;
+    margin-bottom: 14px;
 }
 
 .hero p {
-    color: var(--muted);
+    color: #526d8e;
     font-size: 17px;
 }
 
 .search-box {
-    max-width: 600px;
+    max-width: 620px;
     margin: 25px auto 0;
 }
 
 .search-box input {
     width: 100%;
     padding: 15px 18px;
-    border: 1px solid #d6e3ef;
-    border-radius: 12px;
+    border: 1px solid #c8ddf5;
+    border-radius: 14px;
+    background: #ffffff;
     font-size: 16px;
     outline: none;
 }
 
 .search-box input:focus {
     border-color: var(--blue);
+    box-shadow: 0 0 0 3px #2479e822;
 }
 
-.section-title {
-    color: var(--dark-blue);
-    font-size: 25px;
-    margin: 35px 0 18px;
-}
+/* КНОПКА ЛИТЕРЫ */
 
-.author-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 20px;
-}
-
-.author {
-    background: white;
-    border-radius: 15px;
-    overflow: hidden;
+.liter-button {
+    display: block;
+    margin: 30px auto 0;
+    width: 62px;
+    height: 62px;
+    border: 0;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #368df5, #1558a8);
+    color: #ffffff;
+    font-size: 29px;
     cursor: pointer;
-    box-shadow: 0 3px 14px #0000000a;
+    box-shadow: 0 7px 18px #2479e855;
     transition: 0.2s;
 }
 
-.author:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 7px 20px #00000015;
+.liter-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px #2479e877;
 }
 
-.author img {
-    width: 100%;
-    height: 210px;
-    object-fit: cover;
-    display: block;
-    background: #e5edf5;
-}
-
-.author h3 {
-    padding: 13px;
+.liter-caption {
     text-align: center;
-    font-size: 16px;
+    color: #426080;
+    font-weight: bold;
+    margin-top: 7px;
 }
 
-.category-label {
-    display: inline-block;
-    background: var(--light-blue);
-    color: var(--dark-blue);
-    padding: 5px 11px;
-    border-radius: 20px;
-    font-size: 13px;
-    margin: 4px;
+/* ЗАГОЛОВКИ И КАТЕГОРИИ */
+
+.section-title {
+    color: var(--dark);
+    font-size: 27px;
+    margin: 30px 0 20px;
 }
 
-.back-button, .primary-button {
-    border: none;
-    background: var(--blue);
-    color: white;
-    padding: 11px 18px;
-    border-radius: 9px;
-    cursor: pointer;
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 11px;
+    margin: 0 0 27px;
+}
+
+.category {
+    border: 0;
+    padding: 11px 19px;
+    border-radius: 12px;
+    background: #ffffff;
+    color: #426080;
     font-size: 15px;
+    box-shadow: 0 2px 9px #e1eaf5;
 }
 
-.back-button:hover, .primary-button:hover {
-    background: var(--dark-blue);
+.category.active,
+.category:hover {
+    background: var(--blue);
+    color: #ffffff;
+}
+
+/* КАРТОЧКИ АВТОРОВ */
+
+.author-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(205px, 1fr));
+    gap: 20px;
+}
+
+.author-card {
+    background: #ffffff;
+    padding: 17px;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: 0.2s;
+    border: 1px solid #edf3fa;
+}
+
+.author-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px #d3e3f5;
+}
+
+.portrait {
+    width: 100%;
+    height: 190px;
+    border-radius: 13px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #dcecff, #f2f7ff);
+    display: grid;
+    place-items: center;
+    margin-bottom: 14px;
+    color: var(--blue);
+    font-size: 42px;
+    font-weight: bold;
+}
+
+.portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 25%;
+    display: block;
+}
+
+.author-card h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+    color: var(--dark);
+}
+
+.author-card .years {
+    color: #718198;
+    font-size: 14px;
+    margin-bottom: 14px;
+}
+
+.card-actions {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.details-button {
+    flex: 1;
+    background: var(--blue);
+    color: #ffffff;
+    border: 0;
+    border-radius: 10px;
+    padding: 10px 13px;
+    font-size: 14px;
+}
+
+.details-button:hover {
+    background: #1558a8;
+}
+
+.card-favorite {
+    border: 1px solid #dce8f5;
+    background: #ffffff;
+    color: #2479e8;
+    border-radius: 10px;
+    padding: 7px 12px;
+    font-size: 21px;
+}
+
+.card-favorite.selected {
+    background: #e5f1ff;
+    color: #1558a8;
+}
+
+.catalog-section[hidden] {
+    display: none;
+}
+
+.empty,
+.muted {
+    color: var(--muted);
+}
+
+.empty {
+    padding: 18px 0;
+}
+
+/* СТРАНИЦЫ АВТОРОВ И ПРОИЗВЕДЕНИЙ */
+
+.back-button,
+.primary-button {
+    border: 0;
+    background: var(--blue);
+    color: #ffffff;
+    padding: 11px 17px;
+    border-radius: 10px;
+}
+
+.back-button:hover,
+.primary-button:hover {
+    background: var(--dark);
 }
 
 .author-profile {
     display: grid;
-    grid-template-columns: 260px 1fr;
-    gap: 30px;
-    background: white;
-    padding: 25px;
-    border-radius: 16px;
-    margin-top: 20px;
+    grid-template-columns: 250px 1fr;
+    gap: 27px;
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 17px;
+    margin-top: 18px;
+    box-shadow: var(--shadow);
 }
 
 .author-profile img {
     width: 100%;
-    max-height: 340px;
+    max-height: 330px;
     object-fit: cover;
     border-radius: 12px;
     background: #e5edf5;
 }
 
-.author-profile h1 {
-    color: var(--dark-blue);
+.author-profile h1,
+.work-header h1 {
+    color: var(--dark);
     margin-bottom: 5px;
 }
 
-.content-block {
-    background: white;
-    border-radius: 14px;
+.author-profile p {
+    margin-top: 10px;
+}
+
+.category-label {
+    display: inline-block;
+    background: var(--pale);
+    color: var(--dark);
+    padding: 5px 11px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin: 8px 5px 0 0;
+}
+
+.content-block,
+.work-header {
+    background: #ffffff;
+    border-radius: 16px;
     padding: 22px;
-    margin-top: 20px;
+    margin-top: 18px;
+    box-shadow: var(--shadow);
 }
 
 .content-block h2 {
-    color: var(--dark-blue);
-    margin-bottom: 12px;
-    margin-top: 12px;
+    color: var(--dark);
+    margin: 14px 0 9px;
 }
 
 .content-block p {
     margin-bottom: 12px;
+    white-space: pre-wrap;
+}
+
+.content-block ul {
+    padding-left: 22px;
 }
 
 .work-list {
     display: grid;
-    gap: 12px;
+    gap: 11px;
 }
 
 .work-item {
-    background: var(--light-blue);
-    padding: 15px;
-    border-radius: 10px;
+    background: var(--pale);
+    padding: 15px 17px;
+    border-radius: 11px;
     cursor: pointer;
+    transition: 0.15s;
 }
 
 .work-item:hover {
     background: #d9ebfa;
+    transform: translateX(2px);
 }
 
 .work-item h3 {
-    color: var(--dark-blue);
+    color: var(--dark);
 }
 
-.work-header {
-    background: white;
-    border-radius: 15px;
-    padding: 25px;
-}
-
-.work-header h1 {
-    color: var(--dark-blue);
+.work-item p {
+    color: var(--muted);
+    font-size: 14px;
 }
 
 .tabs {
     display: flex;
-    gap: 10px;
+    gap: 9px;
     flex-wrap: wrap;
-    margin: 20px 0;
+    margin: 18px 0;
 }
 
 .tab {
     border: 1px solid #cbdceb;
-    background: white;
+    background: #ffffff;
     padding: 10px 15px;
     border-radius: 9px;
-    cursor: pointer;
+    color: #243447;
 }
 
 .tab.active {
     background: var(--blue);
-    color: white;
+    color: #ffffff;
     border-color: var(--blue);
 }
 
 .favorite-button {
-    border: none;
-    background: #fff1f1;
-    color: #c0394b;
+    border: 0;
+    background: #fff0f1;
+    color: #bd3447;
     padding: 10px 15px;
     border-radius: 9px;
-    cursor: pointer;
     margin-top: 12px;
 }
 
 .favorite-button.saved {
-    background: #ffe0e0;
+    background: #ffdddd;
 }
 
-.empty {
+/* ЧАТ Литера */
+
+.chat-intro {
+    background: linear-gradient(120deg, #eaf4fc, #ffffff);
+    border: 1px solid #e3edf6;
+    border-radius: 17px;
+    padding: 22px;
+    margin-bottom: 16px;
+}
+
+.chat-intro h1 {
+    color: var(--dark);
+    margin-bottom: 5px;
+}
+
+.chat-shell {
+    max-width: 850px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    border: 1px solid #edf1f5;
+}
+
+.chat-top {
+    padding: 14px 18px;
+    border-bottom: 1px solid #edf1f5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.bot-status {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.status-dot {
+    width: 9px;
+    height: 9px;
+    background: #22a06b;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.clear-chat {
+    border: 0;
+    background: transparent;
     color: var(--muted);
-    padding: 20px 0;
+    padding: 7px 9px;
+    border-radius: 8px;
 }
 
-footer {
-    background: white;
-    text-align: center;
-    padding: 25px;
-    color: var(--muted);
-}
-
-.chat-box {
-    background: white;
-    border-radius: 15px;
-    padding: 20px;
-    max-width: 750px;
-    margin: 20px auto;
+.clear-chat:hover {
+    background: #f2f5f8;
+    color: #243447;
 }
 
 .chat-messages {
-    min-height: 180px;
-    max-height: 350px;
+    height: min(54vh, 510px);
+    min-height: 280px;
     overflow-y: auto;
-    background: #f5f8fc;
-    border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 15px;
+    padding: 20px;
+    background: #f7f9fc;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .message {
-    padding: 10px 13px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    max-width: 90%;
+    max-width: min(86%, 680px);
+    padding: 12px 15px;
+    border-radius: 14px;
     white-space: pre-wrap;
     overflow-wrap: anywhere;
+    line-height: 1.55;
 }
 
 .message.bot {
-    background: #e6f2fc;
+    align-self: flex-start;
+    background: #e8f2fb;
+    border-bottom-left-radius: 5px;
 }
 
 .message.user {
-    background: #d9edff;
-    margin-left: auto;
+    align-self: flex-end;
+    background: #d8ebfc;
+    border-bottom-right-radius: 5px;
+}
+
+.message .sender {
+    font-size: 11px;
+    font-weight: 700;
+    color: #62778b;
+    margin-bottom: 4px;
+}
+
+.message-text {
+    font-size: 15px;
+}
+
+.typing {
+    color: var(--muted);
+    font-size: 13px;
+    padding: 0 20px 10px;
+    background: #f7f9fc;
+}
+
+.quick-prompts {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 13px 17px 0;
+}
+
+.quick-prompts button {
+    border: 1px solid var(--border);
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 7px 11px;
+    font-size: 13px;
+    color: var(--dark);
+}
+
+.quick-prompts button:hover {
+    background: var(--pale);
 }
 
 .chat-form {
     display: flex;
     gap: 10px;
+    padding: 15px 17px 18px;
+    border-top: 1px solid #edf1f5;
 }
 
 .chat-form input {
     flex: 1;
     min-width: 0;
-    padding: 12px;
     border: 1px solid #ccd9e5;
-    border-radius: 9px;
+    border-radius: 11px;
+    padding: 13px 14px;
+    outline: none;
     font-size: 15px;
 }
 
-@media (max-width: 650px) {
+.chat-form input:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px #2479e822;
+}
+
+.chat-form button {
+    min-width: 112px;
+}
+
+.chat-note {
+    font-size: 12px;
+    color: var(--muted);
+    padding: 0 18px 15px;
+}
+
+/* О ПРОЕКТЕ И СЛУЖЕБНЫЕ БЛОКИ */
+
+footer {
+    background: #ffffff;
+    text-align: center;
+    padding: 28px;
+    color: #718198;
+    font-size: 14px;
+}
+
+.loading-state {
+    padding: 28px;
+    text-align: center;
+    color: var(--muted);
+    background: #ffffff;
+    border-radius: 14px;
+}
+
+.error-state {
+    padding: 18px;
+    background: #fff4f2;
+    border: 1px solid #ffd8d1;
+    color: #8d3328;
+    border-radius: 12px;
+    margin: 15px 0;
+}
+
+.about-list {
+    padding-left: 20px;
+}
+
+.about-list li {
+    margin: 7px 0;
+}
+
+/* АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ */
+
+@media(max-width: 680px) {
     header {
+        position: static;
         flex-direction: column;
+        padding: 13px 16px;
     }
 
     nav {
@@ -373,8 +691,36 @@ footer {
         gap: 12px;
     }
 
-    .hero h1 {
-        font-size: 28px;
+    nav button {
+        padding: 8px 9px;
+        font-size: 14px;
+    }
+
+    main {
+        width: 92%;
+        padding: 20px 0 50px;
+    }
+
+    .hero {
+        padding: 38px 18px;
+    }
+
+    .logo {
+        width: 175px;
+        height: 55px;
+    }
+
+    .author-grid {
+        grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+        gap: 13px;
+    }
+
+    .portrait {
+        height: 155px;
+    }
+
+    .author-card {
+        padding: 12px;
     }
 
     .author-profile {
@@ -382,11 +728,23 @@ footer {
     }
 
     .author-profile img {
-        max-width: 260px;
+        max-width: 240px;
     }
 
     .chat-form {
         flex-direction: column;
+    }
+
+    .chat-form button {
+        width: 100%;
+    }
+
+    .message {
+        max-width: 94%;
+    }
+
+    .chat-messages {
+        height: 55vh;
     }
 }
 </style>
@@ -395,872 +753,2205 @@ footer {
 <body>
 
 <header>
-    <div class="brand" onclick="showPage('home')">
-        <img src="logo.png" class="logo" alt="Логотип">
-        <div class="brand-name">Моя литература</div>
+    <div class="brand" onclick="showPage('home')" role="button" tabindex="0" aria-label="На главную">
+        <img
+            src="logo.png"
+            class="logo"
+            alt="Эмблема сайта Моя литература"
+            onerror="this.style.display='none'"
+        >
     </div>
 
     <nav>
-        <button onclick="showPage('home')">Главная</button>
-        <button onclick="showPage('favorites')">Избранное ♥</button>
-        <button onclick="showPage('assistant')">Литера</button>
-        <button onclick="showPage('about')">О проекте</button>
+        <button data-page="home" class="active" onclick="showPage('home')">
+            Главная
+        </button>
+
+        <button data-page="favorites" onclick="showPage('favorites')">
+            Избранное ♥
+        </button>
+
+        <button data-page="assistant" onclick="showPage('assistant')">
+            Литера
+        </button>
+
+        <button data-page="about" onclick="showPage('about')">
+            О проекте
+        </button>
     </nav>
 </header>
 
 <main>
 
-<section id="home" class="page active">
-    <div class="hero">
-        <h1>Открой мир литературы</h1>
-        <p>Изучай писателей, знакомься с произведениями и открывай новые истории.</p>
+    <!-- ГЛАВНАЯ СТРАНИЦА -->
 
-        <div class="search-box">
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Найти автора или произведение..."
-                oninput="searchAuthors()"
-            >
-        </div>
-    </div>
+    <section id="home" class="page active">
 
-    <div id="categorySections">
-        <h2 class="section-title">Русская литература</h2>
-        <div class="author-grid" id="russianAuthors"></div>
+        <div class="hero">
 
-        <h2 class="section-title">Зарубежная литература</h2>
-        <div class="author-grid" id="foreignAuthors"></div>
+            <h1>Открой мир литературы</h1>
 
-        <h2 class="section-title">Детская литература</h2>
-        <div class="author-grid" id="childrenAuthors"></div>
-    </div>
+            <p>
+                Изучай биографии великих писателей,
+                знакомься с произведениями и открывай для себя удивительные истории.
+            </p>
 
-    <div id="searchSection" style="display:none">
-        <h2 class="section-title">Результаты поиска</h2>
-        <div class="author-grid" id="searchResults"></div>
-        <p class="empty" id="noResults" style="display:none">Ничего не найдено.</p>
-    </div>
-</section>
-
-<section id="authorPage" class="page">
-    <button class="back-button" onclick="showPage('home')">← Назад</button>
-    <div id="authorContent"></div>
-</section>
-
-<section id="workPage" class="page">
-    <button class="back-button" onclick="showPage('authorPage')">← К автору</button>
-    <div id="workContent"></div>
-</section>
-
-<section id="favorites" class="page">
-    <h1 class="section-title">Избранное ♥</h1>
-    <div id="favoritesContent"></div>
-</section>
-
-<section id="about" class="page">
-    <div class="content-block">
-        <h1>О проекте «Моя литература»</h1>
-        <p>
-            «Моя литература» — образовательный сайт, созданный для знакомства
-            с русской и зарубежной литературой.
-        </p>
-        <p>
-            Здесь можно узнать о жизни известных писателей, познакомиться
-            с их произведениями, прочитать пересказы и изучить основные
-            литературные темы.
-        </p>
-        <p>
-            Материалы сайта предназначены для помощи школьникам в изучении
-            литературы и подготовке к занятиям.
-        </p>
-        <p>
-            На сайте также есть раздел избранного и помощник «Литера».
-        </p>
-    </div>
-</section>
-
-<section id="assistant" class="page">
-    <div class="content-block">
-        <h1>Литера — помощник по литературе</h1>
-        <p>Задай вопрос о писателях и произведениях.</p>
-    </div>
-
-    <div class="chat-box">
-        <div class="chat-messages" id="chatMessages">
-            <div class="message bot">
-                Привет! Я Литера. Могу помочь найти информацию об авторах
-                и произведениях из каталога сайта.
+            <div class="search-box">
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="🔍 Найти автора или произведение..."
+                    oninput="searchAuthors()"
+                    autocomplete="off"
+                >
             </div>
+
+            <button
+                class="liter-button"
+                onclick="showPage('assistant')"
+                aria-label="Открыть помощника Литера"
+            >
+                ✦
+            </button>
+
+            <div class="liter-caption">
+                Литера
+            </div>
+
         </div>
 
-        <div class="chat-form">
-            <input id="chatInput" type="text" placeholder="Напиши свой вопрос...">
-            <button class="primary-button" onclick="sendMessage()">Отправить</button>
+        <div class="categories" id="categoryFilters">
+
+            <button
+                class="category active"
+                data-category="all"
+                onclick="setCategory('all', this)"
+            >
+                Все авторы
+            </button>
+
+            <button
+                class="category"
+                data-category="russian"
+                onclick="setCategory('russian', this)"
+            >
+                Русские
+            </button>
+
+            <button
+                class="category"
+                data-category="foreign"
+                onclick="setCategory('foreign', this)"
+            >
+                Зарубежные
+            </button>
+
+            <button
+                class="category"
+                data-category="children"
+                onclick="setCategory('children', this)"
+            >
+                Детские
+            </button>
+
         </div>
-    </div>
-</section>
+
+        <div id="catalogLoading" class="loading-state">
+            Загружаем каталог литературы…
+        </div>
+
+        <div id="catalogError" class="error-state" hidden></div>
+
+        <div id="categorySections" hidden>
+
+            <section class="catalog-section" id="sectionRussian">
+                <h2 class="section-title">Русская литература</h2>
+                <div class="author-grid" id="russianAuthors"></div>
+            </section>
+
+            <section class="catalog-section" id="sectionForeign">
+                <h2 class="section-title">Зарубежная литература</h2>
+                <div class="author-grid" id="foreignAuthors"></div>
+            </section>
+
+            <section class="catalog-section" id="sectionChildren">
+                <h2 class="section-title">Детская литература</h2>
+                <div class="author-grid" id="childrenAuthors"></div>
+            </section>
+
+        </div>
+
+        <div id="searchSection" hidden>
+
+            <h2 class="section-title">Результаты поиска</h2>
+
+            <div class="author-grid" id="searchResults"></div>
+
+            <p class="empty" id="noResults" hidden>
+                Ничего не найдено.
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- СТРАНИЦА АВТОРА -->
+
+    <section id="authorPage" class="page">
+
+        <button class="back-button" onclick="showPage('home')">
+            ← Назад
+        </button>
+
+        <div id="authorContent"></div>
+
+    </section>
+
+    <!-- СТРАНИЦА ПРОИЗВЕДЕНИЯ -->
+
+    <section id="workPage" class="page">
+
+        <button class="back-button" onclick="goBackToAuthor()">
+            ← К автору
+        </button>
+
+        <div id="workContent"></div>
+
+    </section>
+
+    <!-- ИЗБРАННОЕ -->
+
+    <section id="favorites" class="page">
+
+        <h1 class="section-title">
+            Избранное ♥
+        </h1>
+
+        <div id="favoritesContent"></div>
+
+    </section>
+
+    <!-- О ПРОЕКТЕ -->
+
+    <section id="about" class="page">
+
+        <div class="content-block">
+
+            <h1>О проекте «Моя литература»</h1>
+
+            <p>
+                «Моя литература» — образовательный сайт
+                для знакомства с русской и зарубежной литературой.
+            </p>
+
+            <p>
+                Здесь можно узнать о писателях, изучить произведения,
+                прочитать пересказы и познакомиться с основными литературными темами.
+            </p>
+
+            <p>
+                Литера — помощник по литературе.
+                Он использует материалы каталога сайта и базу знаний.
+            </p>
+
+            <ul class="about-list">
+
+                <li>Каталог авторов и произведений.</li>
+
+                <li>Краткие и подробные пересказы.</li>
+
+                <li>Герои, темы, идеи и проблематика произведений.</li>
+
+                <li>Помощник с контекстом переписки.</li>
+
+                <li>Поиск по авторам и произведениям.</li>
+
+                <li>Система избранного.</li>
+
+            </ul>
+
+        </div>
+
+    </section>
+
+    <!-- СТРАНИЦА Литера -->
+
+    <section id="assistant" class="page">
+
+        <div class="chat-intro">
+
+            <h1>Литера — помощник по литературе</h1>
+
+            <p>
+                Спроси об авторе, попроси пересказ или разбор произведения.
+                Можно писать своими словами и с опечатками.
+            </p>
+
+        </div>
+
+        <div class="chat-shell">
+
+            <div class="chat-top">
+
+                <div class="bot-status">
+
+                    <span class="status-dot"></span>
+
+                    Литера
+
+                    <span
+                        class="muted"
+                        style="font-weight:400;font-size:12px"
+                    >
+                        • помощник онлайн
+                    </span>
+
+                </div>
+
+                <button class="clear-chat" onclick="clearChat()">
+                    Очистить чат
+                </button>
+
+            </div>
+
+            <div class="chat-messages" id="chatMessages" aria-live="polite">
+
+                <div class="message bot">
+
+                    <div class="sender">
+                        Литера
+                    </div>
+
+                    <div class="message-text">
+                        Привет! 👋 Я Литера — твой помощник по литературе.
+                        Могу пересказать произведение, рассказать об авторе,
+                        объяснить героев и помочь с анализом.
+                        Что будем изучать? 📚
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="typing" id="typingIndicator" hidden>
+               Литера готовит ответ…
+            </div>
+
+            <div class="quick-prompts">
+
+                <button onclick="usePrompt('Перескажи Капитанскую дочку')">
+                    📖 Пересказ
+                </button>
+
+                <button onclick="usePrompt('Расскажи о главных героях произведения')">
+                    👥 Главные герои
+                </button>
+
+                <button onclick="usePrompt('Объясни главную мысль произведения')">
+                    💡 Главная мысль
+                </button>
+
+            </div>
+
+            <form class="chat-form" id="chatForm">
+
+                <input
+                    id="chatInput"
+                    type="text"
+                    placeholder="Напиши свой вопрос..."
+                    autocomplete="off"
+                    maxlength="2000"
+                >
+
+                <button
+                    class="primary-button"
+                    id="sendButton"
+                    type="submit"
+                >
+                    Отправить
+                </button>
+
+            </form>
+
+            <div class="chat-note">
+                Ответы формируются локальным помощником сайта.
+                Проверяй важные сведения по учебнику и первоисточнику.
+            </div>
+
+        </div>
+
+    </section>
 
 </main>
 
 <footer>
-    © 2026 Моя литература
+    © 2026 Моя литература · Литера
 </footer>
 
 <script>
+"use strict";
 
-// ДАННЫЕ АВТОРОВ
+/*
+    Литера — ОСНОВНОЙ JAVASCRIPT
 
-const authors = [
+    Используемые маршруты сервера:
+
+    GET /api/catalog
+
+    Ответ:
     {
-        id: 1,
-        name: "Александр Пушкин",
-        years: "1799–1837",
-        photo: "images/pushkin.jpg",
-        categories: ["Русская литература"],
-        bio: "Александр Сергеевич Пушкин — великий русский поэт, прозаик и драматург. Его творчество оказало огромное влияние на развитие русской литературы.",
-        facts: [
-            "Пушкин считается основоположником современного русского литературного языка.",
-            "Он написал роман в стихах «Евгений Онегин».",
-            "Многие его произведения стали классикой русской литературы."
-        ],
-        works: [
-            {
-                title: "Капитанская дочка",
-                year: "1836",
-                short: "Роман рассказывает о молодом дворянине Петре Гринёве, который отправляется служить в крепость. Там он знакомится с Машей Мироновой и оказывается участником событий крестьянского восстания под руководством Емельяна Пугачёва. Гринёв проходит через испытания, сталкивается с опасностью и должен сделать непростой нравственный выбор. История показывает значение чести, верности и человеческого достоинства.",
-                full: "Пётр Гринёв вспоминает свою молодость. По решению отца он отправляется на военную службу. По дороге герой встречает незнакомого человека, которому помогает во время бурана. Позже выясняется, что это был Емельян Пугачёв. Гринёв прибывает в Белогорскую крепость, знакомится с её комендантом и его дочерью Машей. Между молодыми людьми возникают чувства. Однако вскоре крепость оказывается захвачена восставшими. Гринёв отказывается присягать Пугачёву, но тот узнаёт в нём человека, оказавшего ему помощь в дороге, и сохраняет ему жизнь. В дальнейшем герой пытается спасти Машу и доказать её невиновность. В центре произведения — испытание чести, долга и верности.",
-                characters: "Пётр Гринёв — честный и смелый молодой дворянин. Маша Миронова — добрая и решительная девушка. Емельян Пугачёв — предводитель восстания. Швабрин — офицер, поступающий нечестно.",
-                theme: "Честь, долг, любовь, верность и нравственный выбор.",
-                idea: "Человек должен оставаться верным своим принципам даже в трудных обстоятельствах.",
-                problems: "Честь и бесчестие, верность и предательство, ответственность за поступки."
-            }
-        ]
-    },
-
-    {
-        id: 2,
-        name: "Лев Толстой",
-        years: "1828–1910",
-        photo: "images/tolstoy.jpg",
-        categories: ["Русская литература"],
-        bio: "Лев Николаевич Толстой — русский писатель и мыслитель, один из крупнейших авторов мировой литературы.",
-        facts: [
-            "Толстой написал романы «Война и мир» и «Анна Каренина».",
-            "Он основал школу для крестьянских детей в Ясной Поляне.",
-            "Его произведения переведены на многие языки."
-        ],
-        works: [
-            {
-                title: "Кавказский пленник",
-                year: "1872",
-                short: "Офицер Жилин попадает в плен к горцам во время службы на Кавказе. Вместе с ним пленником становится Костылин. Жилин не теряет надежды на спасение и старается выбраться из плена. Ему помогает девочка Дина, которая относится к нему с добротой. Произведение рассказывает о смелости, дружбе и силе характера.",
-                full: "Офицер Жилин получает письмо от матери и отправляется домой. По дороге он вместе с Костылиным оказывается в опасной ситуации и попадает в плен. Пленники живут в ауле и надеются на выкуп. Жилин старается не унывать: он мастерит игрушки, помогает окружающим и изучает местность. Костылин, напротив, почти ничего не предпринимает. Девочка Дина привязывается к Жилину и приносит ему еду. Герой предпринимает попытку побега, но она оказывается неудачной. Позже Дина помогает ему выбраться снова. Жилин добирается до русской крепости, а Костылин остаётся ждать выкупа.",
-                characters: "Жилин — смелый, находчивый и трудолюбивый офицер. Костылин — менее решительный пленник. Дина — добрая и отзывчивая девочка.",
-                theme: "Мужество, дружба, свобода и взаимопомощь.",
-                idea: "Сила духа и доброта помогают человеку преодолевать трудности.",
-                problems: "Смелость и трусость, взаимопомощь, отношение к другим людям."
-            }
-        ]
-    },
-
-    {
-        id: 3,
-        name: "Антон Чехов",
-        years: "1860–1904",
-        photo: "images/chekhov.jpg",
-        categories: ["Русская литература"],
-        bio: "Антон Павлович Чехов — русский писатель, драматург и врач. Он прославился рассказами, в которых с юмором и вниманием к деталям показывал жизнь людей.",
-        facts: [
-            "Чехов был врачом по образованию.",
-            "Он написал пьесы «Чайка» и «Вишнёвый сад».",
-            "Его рассказы часто построены на коротких, выразительных сценах."
-        ],
-        works: [
-            {
-                title: "Хамелеон",
-                year: "1884",
-                short: "Полицейский надзиратель Очумелов разбирается в происшествии: собака укусила человека. В зависимости от того, кому принадлежит собака, он постоянно меняет своё мнение. Рассказ высмеивает угодничество, чинопочитание и отсутствие собственного достоинства.",
-                full: "На базарной площади происходит шум: золотых дел мастер Хрюкин жалуется, что его укусила собака. Полицейский надзиратель Очумелов начинает разбираться в случившемся. Он то требует наказать владельца собаки, то меняет решение, когда слышит предположения, что животное может принадлежать важному человеку. Очумелов несколько раз меняет своё отношение к ситуации. В конце выясняется, что собака связана с генералом. Надзиратель становится к ней доброжелателен, а Хрюкина высмеивают. Чехов показывает, как поведение человека может зависеть от положения окружающих.",
-                characters: "Очумелов — полицейский надзиратель, меняющий мнение. Хрюкин — золотых дел мастер. Елдырин — городовой.",
-                theme: "Чинопочитание, угодничество и несправедливость.",
-                idea: "Нельзя оценивать людей и поступки по их положению в обществе.",
-                problems: "Лицемерие, зависимость от власти, отсутствие принципов."
-            }
-        ]
-    },
-
-    {
-        id: 4,
-        name: "Николай Гоголь",
-        years: "1809–1852",
-        photo: "images/gogol.jpg",
-        categories: ["Русская литература"],
-        bio: "Николай Васильевич Гоголь — русский писатель, драматург и публицист. В своих произведениях он сочетал юмор, сатиру и глубокие размышления о жизни общества.",
-        facts: [
-            "Гоголь написал комедию «Ревизор».",
-            "Его произведение «Мёртвые души» стало одним из главных произведений русской классики.",
-            "Писатель родился на территории современной Украины."
-        ],
-        works: [
-            {
-                title: "Шинель",
-                year: "1842",
-                short: "Главный герой повести — бедный чиновник Акакий Акакиевич Башмачкин. Его старая шинель приходит в негодность, и он долго копит деньги на новую. Покупка становится для него важным событием, но вскоре шинель похищают. Попытки добиться справедливости заканчиваются неудачей. Повесть рассказывает о равнодушии общества к маленькому человеку.",
-                full: "Акакий Акакиевич Башмачкин служит переписчиком бумаг и ведёт очень скромную жизнь. Его старая шинель настолько изношена, что портной отказывается её чинить. Герой начинает экономить и постепенно собирает деньги на новую вещь. Покупка шинели приносит ему радость и меняет отношение окружающих. Однако вскоре шинель похищают. Башмачкин обращается за помощью, но сталкивается с равнодушием и грубостью. После неприятного разговора с важным лицом его здоровье ухудшается. История раскрывает тему человеческого достоинства и безразличия общества.",
-                characters: "Акакий Акакиевич — скромный чиновник. Петрович — портной. Значительное лицо — чиновник, проявивший грубость.",
-                theme: "Положение маленького человека в обществе.",
-                idea: "Каждый человек заслуживает уважения и сочувствия.",
-                problems: "Социальное неравенство, равнодушие, унижение человеческого достоинства."
-            }
-        ]
-    },
-
-    {
-        id: 5,
-        name: "Михаил Лермонтов",
-        years: "1814–1841",
-        photo: "images/lermontov.jpg",
-        categories: ["Русская литература"],
-        bio: "Михаил Юрьевич Лермонтов — русский поэт, прозаик и драматург. Его творчество связано с темами свободы, одиночества и внутреннего мира человека.",
-        facts: [
-            "Лермонтов написал роман «Герой нашего времени».",
-            "Он был талантливым художником.",
-            "Поэт погиб на дуэли в возрасте 26 лет."
-        ],
-        works: [
-            {
-                title: "Мцыри",
-                year: "1839",
-                short: "Юный послушник, выросший в монастыре, мечтает о свободе и родине. Однажды он убегает и проводит несколько дней на воле. За это время герой переживает сильные чувства, встречает опасности и понимает, насколько сильно хочет жить свободной жизнью.",
-                full: "Мцыри ещё ребёнком оказался в монастыре, где его воспитывали монахи. Он не чувствует себя частью этого мира и тоскует по родине и семье. Однажды во время грозы герой исчезает из монастыря. Три дня он проводит на свободе: любуется природой, встречает опасности и вступает в схватку с барсом. В конце концов Мцыри возвращается к монастырю, обессиленный и измученный. Перед смертью он рассказывает о пережитом. Для него даже короткое время свободы оказывается важнее долгих лет спокойной жизни в заточении.",
-                characters: "Мцыри — юноша, мечтающий о свободе. Монахи — люди, воспитавшие героя в монастыре.",
-                theme: "Свобода, родина, одиночество и борьба за мечту.",
-                idea: "Свобода и возможность жить по своему выбору имеют огромную ценность.",
-                problems: "Несвобода, конфликт личности и общества, поиск своего места в мире."
-            }
-        ]
-    },
-
-    {
-        id: 6,
-        name: "Николай Носов",
-        years: "1908–1976",
-        photo: "images/nosov.jpg",
-        categories: ["Русская литература", "Детская литература"],
-        bio: "Николай Николаевич Носов — советский детский писатель, известный весёлыми и поучительными рассказами о детях.",
-        facts: [
-            "Носов создал цикл произведений о Незнайке.",
-            "Его рассказы часто посвящены школьной жизни и дружбе.",
-            "По профессии он также был режиссёром и сценаристом."
-        ],
-        works: [
-            {
-                title: "Фантазёры",
-                year: "1940-е годы",
-                short: "Два мальчика любят придумывать необычные истории и соревнуются в фантазии. Они рассказывают друг другу невероятные выдумки, но вскоре встречают человека, который пытается выдать обман за правду. Рассказ помогает понять разницу между безобидной фантазией и настоящей ложью.",
-                full: "Два мальчика обсуждают свои фантазии и придумывают невероятные истории. Их выдумки становятся всё интереснее и смешнее. Они понимают, что фантазировать можно ради игры и развлечения. Но затем появляется человек, который рассказывает неправдоподобную историю так, будто это правда. Мальчики замечают разницу между фантазией и обманом. Произведение показывает, что воображение делает жизнь интереснее, но обманывать людей нехорошо.",
-                characters: "Мишутка и Стасик — мальчики с богатым воображением. Игорь — герой, связанный с историей о настоящем обмане.",
-                theme: "Фантазия, честность и детская дружба.",
-                idea: "Фантазировать интересно, но нельзя выдавать ложь за правду ради обмана.",
-                problems: "Честность, ответственность за слова, различие между выдумкой и обманом."
-            }
-        ]
-    },
-
-    {
-        id: 7,
-        name: "Корней Чуковский",
-        years: "1882–1969",
-        photo: "images/chukovsky.jpg",
-        categories: ["Русская литература", "Детская литература"],
-        bio: "Корней Иванович Чуковский — русский и советский детский писатель, поэт, переводчик и литературовед.",
-        facts: [
-            "Он написал сказки «Мойдодыр» и «Айболит».",
-            "Чуковский много лет занимался переводами.",
-            "Его произведения отличаются ритмом, юмором и запоминающимися героями."
-        ],
-        works: [
-            {
-                title: "Мойдодыр",
-                year: "1923",
-                short: "В стихотворной сказке мальчик не любит умываться и следить за чистотой. Вещи начинают убегать от него, а затем появляется Мойдодыр, который объясняет важность чистоты. История в весёлой форме напоминает детям о гигиене и аккуратности.",
-                full: "Мальчик просыпается и не хочет умываться. Вскоре окружающие предметы начинают вести себя необычно: от него убегают вещи. Появляется Мойдодыр — необычный персонаж, который требует от мальчика соблюдать чистоту. Герой узнаёт, что грязь и неряшливость могут привести к неприятностям. В итоге мальчик меняет своё отношение к умыванию и становится аккуратнее.",
-                characters: "Мойдодыр — строгий защитник чистоты. Мальчик — герой, которому предстоит научиться аккуратности.",
-                theme: "Чистота и личная гигиена.",
-                idea: "Важно заботиться о чистоте и своём здоровье.",
-                problems: "Неряшливость, ответственность за себя, привычки."
-            }
-        ]
-    },
-
-    {
-        id: 8,
-        name: "Астрид Линдгрен",
-        years: "1907–2002",
-        photo: "images/lindgren.jpg",
-        categories: ["Зарубежная литература", "Детская литература"],
-        bio: "Астрид Линдгрен — шведская писательница, создавшая множество известных книг для детей.",
-        facts: [
-            "Она является автором истории о Карлсоне.",
-            "Её книги переведены на десятки языков.",
-            "Писательница получила международное признание за вклад в детскую литературу."
-        ],
-        works: [
-            {
-                title: "Малыш и Карлсон",
-                year: "1955",
-                short: "Мальчик по прозвищу Малыш знакомится с необычным Карлсоном, который живёт на крыше. Карлсон становится его другом, и вместе они попадают в забавные ситуации. История рассказывает о дружбе, воображении и детском мире.",
-                full: "Малыш — младший ребёнок в семье, которому иногда не хватает внимания. Однажды он знакомится с Карлсоном — маленьким человечком с пропеллером за спиной, живущим на крыше. Карлсон называет себя лучшим в мире специалистом по многим делам. Вместе герои проводят время, играют и попадают в различные приключения. Их дружба помогает Малышу справляться с одиночеством. Книга наполнена юмором и показывает важность общения и фантазии.",
-                characters: "Малыш — добрый и мечтательный мальчик. Карлсон — весёлый и самоуверенный человечек с пропеллером.",
-                theme: "Дружба, детство и воображение.",
-                idea: "Дружба и поддержка делают жизнь радостнее.",
-                problems: "Одиночество, взаимопонимание, ответственность."
-            }
-        ]
-    },
-
-    {
-        id: 9,
-        name: "Марк Твен",
-        years: "1835–1910",
-        photo: "images/twain.jpg",
-        categories: ["Зарубежная литература"],
-        bio: "Марк Твен — американский писатель, журналист и юморист. Он известен произведениями о приключениях и взрослении детей.",
-        facts: [
-            "Настоящее имя писателя — Сэмюэл Клеменс.",
-            "Он работал журналистом.",
-            "Его книги о Томе Сойере и Гекльберри Финне стали известны во всём мире."
-        ],
-        works: [
-            {
-                title: "Приключения Тома Сойера",
-                year: "1876",
-                short: "Том Сойер — озорной мальчик, который живёт в небольшом американском городке. Он постоянно придумывает приключения, дружит с Гекльберри Финном и оказывается свидетелем опасных событий. Книга рассказывает о детстве, дружбе, смелости и взрослении.",
-                full: "Том Сойер живёт вместе с тётей Полли и часто попадает в неприятности из-за своего озорного характера. Он знакомится с Бекки Тэтчер, дружит с Геком Финном и вместе с ним отправляется навстречу приключениям. Однажды мальчики становятся свидетелями преступления и оказываются перед сложным выбором. Том проявляет смелость и помогает восстановить справедливость. В ходе событий герои учатся отвечать за свои поступки и ценить дружбу.",
-                characters: "Том Сойер — любознательный и озорной мальчик. Гекльберри Финн — его друг. Бекки Тэтчер — подруга Тома. Тётя Полли — заботится о Томе.",
-                theme: "Детство, дружба, приключения и взросление.",
-                idea: "Смелость и честность помогают поступать правильно.",
-                problems: "Ответственность, дружба, справедливость, взросление."
-            }
-        ]
-    },
-
-    {
-        id: 10,
-        name: "Жюль Верн",
-        years: "1828–1905",
-        photo: "images/verne.jpg",
-        categories: ["Зарубежная литература"],
-        bio: "Жюль Верн — французский писатель, один из основателей научно-фантастической литературы и автор приключенческих романов.",
-        facts: [
-            "Он написал «Путешествие к центру Земли».",
-            "Его книги посвящены науке, открытиям и путешествиям.",
-            "Многие идеи писателя позднее стали реальностью."
-        ],
-        works: [
-            {
-                title: "Двадцать тысяч лье под водой",
-                year: "1870",
-                short: "Профессор Аронакс, его слуга Консель и гарпунщик Нед Ленд оказываются на подводной лодке «Наутилус». Ею управляет капитан Немо. Герои путешествуют по океанам и открывают удивительный подводный мир. Книга рассказывает о науке, свободе и приключениях.",
-                full: "После сообщений о загадочном морском существе начинается экспедиция. Профессор Аронакс, Консель и Нед Ленд оказываются на борту необычной подводной лодки «Наутилус». Ею управляет капитан Немо, который не желает возвращаться к обычной жизни. Путешественники исследуют океаны, наблюдают за морскими животными и сталкиваются с опасностями. Со временем герои начинают задумываться о том, как покинуть лодку. Их путешествие становится рассказом о научных открытиях и человеческой свободе.",
-                characters: "Профессор Аронакс — учёный. Консель — его помощник. Нед Ленд — опытный гарпунщик. Капитан Немо — загадочный командир «Наутилуса».",
-                theme: "Наука, исследование мира, свобода и приключения.",
-                idea: "Знания открывают человеку новые возможности, но свобода остаётся важной ценностью.",
-                problems: "Научный прогресс, одиночество, свобода и ответственность."
-            }
-        ]
-    },
-
-    {
-        id: 11,
-        name: "Антуан де Сент-Экзюпери",
-        years: "1900–1944",
-        photo: "images/exupery.jpg",
-        categories: ["Зарубежная литература"],
-        bio: "Антуан де Сент-Экзюпери — французский писатель и лётчик. Его самая известная книга — философская сказка «Маленький принц».",
-        facts: [
-            "Сент-Экзюпери работал пилотом.",
-            "«Маленький принц» впервые вышел в 1943 году.",
-            "Писатель сам создал иллюстрации к книге."
-        ],
-        works: [
-            {
-                title: "Маленький принц",
-                year: "1943",
-                short: "Лётчик встречает в пустыне необычного мальчика с другой планеты. Маленький принц рассказывает о своём путешествии, знакомстве с разными персонажами и любимой розе. Герои размышляют о дружбе, любви, ответственности и важных вещах, которые не всегда заметны с первого взгляда.",
-                full: "Лётчик совершает вынужденную посадку в пустыне и встречает Маленького принца. Мальчик рассказывает о своей маленькой планете, розе и путешествии по другим астероидам. На своём пути он встречает короля, честолюбца, пьяницу, делового человека и фонарщика. На Земле Маленький принц знакомится с Лисом, который помогает ему понять смысл дружбы и привязанности. Постепенно герой осознаёт, почему его роза так важна для него. Книга предлагает задуматься о любви, ответственности и ценности человеческих отношений.",
-                characters: "Маленький принц — любознательный мальчик. Лётчик — рассказчик. Роза — дорогой для принца цветок. Лис — помогает герою понять дружбу.",
-                theme: "Дружба, любовь, ответственность и духовные ценности.",
-                idea: "Самое важное нельзя оценить только внешним взглядом.",
-                problems: "Одиночество, ответственность, привязанность, смысл жизни."
-            }
-        ]
-    },
-
-    {
-        id: 12,
-        name: "Даниэль Дефо",
-        years: "1660–1731",
-        photo: "images/defoe.jpg",
-        categories: ["Зарубежная литература"],
-        bio: "Даниэль Дефо — английский писатель и публицист, автор знаменитого приключенческого романа о Робинзоне Крузо.",
-        facts: [
-            "Дефо считается одним из основателей английского реалистического романа.",
-            "«Робинзон Крузо» был опубликован в 1719 году.",
-            "Писатель занимался журналистикой и политической публицистикой."
-        ],
-        works: [
-            {
-                title: "Робинзон Крузо",
-                year: "1719",
-                short: "Моряк Робинзон Крузо после кораблекрушения оказывается один на необитаемом острове. Он учится добывать пищу, строить жилище и приспосабливаться к новым условиям. Благодаря терпению и труду герой выживает и постепенно обустраивает свою жизнь.",
-                full: "Робинзон Крузо с юности мечтает о морских путешествиях. Во время одного из плаваний происходит кораблекрушение, и он оказывается единственным выжившим. Герой переносит на остров полезные вещи с корабля, строит жилище, учится выращивать растения и разводить животных. Он ведёт записи о своих делах и постепенно приспосабливается к жизни вдали от людей. Позже Робинзон встречает Пятницу, которому помогает. Их отношения становятся важной частью дальнейшей истории. Роман показывает, как труд, знания и настойчивость помогают человеку преодолевать испытания.",
-                characters: "Робинзон Крузо — трудолюбивый и находчивый моряк. Пятница — человек, с которым Робинзон знакомится на острове.",
-                theme: "Выживание, труд, самостоятельность и сила человеческого характера.",
-                idea: "Трудолюбие, знания и настойчивость помогают преодолевать трудности.",
-                problems: "Одиночество, ответственность, приспособление к новым условиям."
-            }
-        ]
+        "authors": []
     }
-];
+
+    POST /api/chat
+
+    Запрос:
+    {
+        "message": "Вопрос пользователя",
+        "history": []
+    }
+
+    Ответ:
+    {
+        "reply": "Ответ Литеры"
+    }
+
+    Этот код работает с существующим server.js.
+    Сервер, knowledge.json и модель Ollama менять не требуется.
+*/
 
 
-// ПЕРЕМЕННЫЕ САЙТА
+/* =========================================
+   1. ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
+========================================= */
+
+let authors = [];
 
 let currentAuthor = null;
+
 let currentWork = null;
+
 let currentTab = "short";
 
+let currentCategory = "all";
 
-// ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ
+let chatHistory = [];
 
-function showPage(pageId) {
-    document.querySelectorAll(".page").forEach(page => {
-        page.classList.remove("active");
-    });
+let isSending = false;
 
-    const page = document.getElementById(pageId);
+const $ = id => document.getElementById(id);
 
-    if (page) {
-        page.classList.add("active");
+
+/* =========================================
+   2. ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
+========================================= */
+
+function safeText(value, fallback = "") {
+
+    if (typeof value === "string" && value.trim()) {
+        return value;
     }
 
-    window.scrollTo({ top: 0, behavior: "smooth" });
-
-    if (pageId === "favorites") {
-        renderFavorites();
+    if (typeof value === "number") {
+        return String(value);
     }
+
+    return fallback;
 }
 
 
-// КАРТОЧКА АВТОРА
+function escapeHTML(value) {
 
-function authorCard(author) {
-    return `
-        <div class="author" onclick="openAuthor(${author.id})">
-            <img
-                src="${author.photo}"
-                alt="${author.name}"
-                onerror="this.alt='Фотография не найдена'; this.style.objectFit='contain'"
-            >
-            <h3>${author.name}</h3>
-        </div>
-    `;
+    return String(value ?? "").replace(/[&<>"']/g, ch => ({
+
+        "&": "&amp;",
+
+        "<": "&lt;",
+
+        ">": "&gt;",
+
+        '"': "&quot;",
+
+        "'": "&#039;"
+
+    })[ch]);
+
 }
 
 
-// ОТОБРАЖЕНИЕ АВТОРОВ
+function normalize(value) {
 
-function renderAuthors() {
-    document.getElementById("russianAuthors").innerHTML =
-        authors.filter(a => a.categories.includes("Русская литература"))
-        .map(authorCard).join("");
+    return String(value || "")
 
-    document.getElementById("foreignAuthors").innerHTML =
-        authors.filter(a => a.categories.includes("Зарубежная литература"))
-        .map(authorCard).join("");
+        .toLocaleLowerCase("ru")
 
-    document.getElementById("childrenAuthors").innerHTML =
-        authors.filter(a => a.categories.includes("Детская литература"))
-        .map(authorCard).join("");
+        .replace(/ё/g, "е")
+
+        .replace(/[^a-zа-я0-9]+/gi, " ")
+
+        .trim();
+
 }
 
 
-// ПОИСК
+function getWorkTitle(work) {
 
-function searchAuthors() {
-    const query = document.getElementById("searchInput")
-        .value.trim().toLowerCase();
-
-    const categorySections =
-        document.getElementById("categorySections");
-
-    const searchSection =
-        document.getElementById("searchSection");
-
-    if (!query) {
-        categorySections.style.display = "block";
-        searchSection.style.display = "none";
-        return;
+    if (typeof work === "string") {
+        return work;
     }
 
-    categorySections.style.display = "none";
-    searchSection.style.display = "block";
+    if (work && typeof work === "object") {
 
-    const results = authors.filter(author => {
-        const authorMatch =
-            author.name.toLowerCase().includes(query);
-
-        const workMatch = author.works.some(work =>
-            work.title.toLowerCase().includes(query)
+        return safeText(
+            work.title,
+            safeText(work.name, "Без названия")
         );
 
-        return authorMatch || workMatch;
-    });
+    }
 
-    document.getElementById("searchResults").innerHTML =
-        results.map(authorCard).join("");
+    return "Без названия";
 
-    document.getElementById("noResults").style.display =
-        results.length ? "none" : "block";
 }
 
 
-// СТРАНИЦА АВТОРА
+function normalizeWork(work) {
 
-function openAuthor(id) {
-    currentAuthor = authors.find(author => author.id === id);
+    if (typeof work === "string") {
 
-    if (!currentAuthor) return;
+        return {
+            title: work,
+            summary: "",
+            short: "",
+            full: "",
+            characters: [],
+            theme: "",
+            idea: "",
+            problems: [],
+            genre: "",
+            year: "",
+            years: "",
+            aliases: []
+        };
 
-    const facts = currentAuthor.facts
-        .map(fact => `<li>${fact}</li>`)
+    }
+
+    if (!work || typeof work !== "object") {
+
+        return {
+            title: "Без названия",
+            summary: "",
+            full: "",
+            characters: [],
+            theme: "",
+            idea: "",
+            problems: [],
+            aliases: []
+        };
+
+    }
+
+    return {
+
+        ...work,
+
+        title: getWorkTitle(work),
+
+        summary: safeText(work.summary, safeText(work.short, "")),
+
+        short: safeText(work.short, safeText(work.summary, "")),
+
+        full: safeText(work.full, ""),
+
+        characters: work.characters || [],
+
+        theme: safeText(work.theme, ""),
+
+        idea: safeText(work.idea, ""),
+
+        problems: work.problems || [],
+
+        aliases: Array.isArray(work.aliases) ? work.aliases : []
+
+    };
+
+}
+
+
+function getAuthorWorks(author) {
+
+    if (!author || !Array.isArray(author.works)) {
+        return [];
+    }
+
+    return author.works.map(normalizeWork);
+
+}
+
+
+/* =========================================
+   3. ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ
+========================================= */
+
+function showPage(pageId) {
+
+    document.querySelectorAll(".page").forEach(page => {
+
+        page.classList.remove("active");
+
+    });
+
+    const target = $(pageId);
+
+    if (target) {
+
+        target.classList.add("active");
+
+    }
+
+    document.querySelectorAll("nav button").forEach(button => {
+
+        button.classList.toggle(
+            "active",
+            button.dataset.page === pageId
+        );
+
+    });
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+    if (pageId === "favorites") {
+
+        renderFavorites();
+
+    }
+
+}
+
+
+/* =========================================
+   4. ФОТОГРАФИИ АВТОРОВ
+========================================= */
+
+function authorPhoto(author) {
+
+    const photos = {
+
+        "Александр Сергеевич Пушкин": "pushkin",
+
+        "Александр Пушкин": "pushkin",
+
+        "Лев Николаевич Толстой": "tolstoy",
+
+        "Лев Толстой": "tolstoy",
+
+        "Антон Павлович Чехов": "chekhov",
+
+        "Антон Чехов": "chekhov",
+
+        "Николай Васильевич Гоголь": "gogol",
+
+        "Николай Гоголь": "gogol",
+
+        "Михаил Юрьевич Лермонтов": "lermontov",
+
+        "Михаил Лермонтов": "lermontov",
+
+        "Николай Николаевич Носов": "nosov",
+
+        "Николай Носов": "nosov",
+
+        "Корней Иванович Чуковский": "chukovsky",
+
+        "Корней Чуковский": "chukovsky",
+
+        "Астрид Линдгрен": "lindgren",
+
+        "Марк Твен": "twain",
+
+        "Жюль Верн": "verne",
+
+        "Антуан де Сент-Экзюпери": "exupery",
+
+        "Даниэль Дефо": "defoe"
+
+    };
+
+    if (author && author.photo) {
+
+        return author.photo;
+
+    }
+
+    const name = author && author.name
+        ? author.name
+        : "";
+
+    const fileName = photos[name] || "book";
+
+    return `images/${fileName}.jpg`;
+
+}
+
+
+/* =========================================
+   5. ОПРЕДЕЛЕНИЕ КАТЕГОРИИ АВТОРА
+========================================= */
+
+function categoryKey(author) {
+
+    const categories = [];
+
+    if (Array.isArray(author.categories)) {
+        categories.push(...author.categories);
+    }
+
+    if (author.categories && !Array.isArray(author.categories)) {
+        categories.push(author.categories);
+    }
+
+    if (author.category) {
+        categories.push(author.category);
+    }
+
+    const joined = normalize(categories.join(" "));
+
+    const country = normalize(author.country || "");
+    const bio = normalize(author.bio || "");
+    const name = normalize(author.name || "");
+
+    // ДЕТСКАЯ ЛИТЕРАТУРА
+    if (
+        joined.includes("детск") ||
+        joined.includes("children") ||
+        joined.includes("kids") ||
+        bio.includes("детск") ||
+        name.includes("носова") ||
+        name.includes("носов") ||
+        name.includes("чуковск") ||
+        name.includes("линдгрен")
+    ) {
+        return "children";
+    }
+
+    // ЗАРУБЕЖНАЯ ЛИТЕРАТУРА
+    if (
+        joined.includes("зарубеж") ||
+        joined.includes("иностран") ||
+        joined.includes("foreign") ||
+        (
+            country &&
+            !country.includes("росси") &&
+            !country.includes("ссср") &&
+            !country.includes("russia") &&
+            !country.includes("ussr")
+        )
+    ) {
+        return "foreign";
+    }
+
+    // РУССКАЯ ЛИТЕРАТУРА
+    return "russian";
+}
+/* =========================================
+   6. ИЗБРАННЫЕ АВТОРЫ
+========================================= */
+
+function getFavoriteAuthors() {
+
+    try {
+
+        const saved = JSON.parse(
+            localStorage.getItem("literatureFavorites") || "[]"
+        );
+
+        return Array.isArray(saved)
+            ? saved.map(Number)
+            : [];
+
+    } catch (error) {
+
+        return [];
+
+    }
+
+}
+
+
+function toggleAuthorFavorite(id) {
+
+    let list = getFavoriteAuthors();
+
+    const numericId = Number(id);
+
+    if (list.includes(numericId)) {
+
+        list = list.filter(item => item !== numericId);
+
+    } else {
+
+        list.push(numericId);
+
+    }
+
+    try {
+
+        localStorage.setItem(
+            "literatureFavorites",
+            JSON.stringify(list)
+        );
+
+    } catch (error) {
+
+        console.error("Не удалось сохранить избранное:", error);
+
+    }
+
+    if ($("favorites").classList.contains("active")) {
+
+        renderFavorites();
+
+    } else if ($("searchInput").value.trim()) {
+
+        searchAuthors();
+
+    } else {
+
+        renderAuthors();
+
+    }
+
+}
+
+
+/* =========================================
+   7. СОЗДАНИЕ КАРТОЧКИ АВТОРА
+========================================= */
+
+
+function authorCard(author) {
+
+    const id = Number(author.id);
+
+    const saved = getFavoriteAuthors().includes(id);
+
+    const initials = safeText(author.name, "Автор")
+        .split(" ")
+        .slice(0, 2)
+        .map(part => part[0] || "")
         .join("");
 
-    const works = currentAuthor.works.map((work, index) => `
-        <div class="work-item"
-             onclick="openWork(${currentAuthor.id}, ${index})">
-            <h3>${work.title}</h3>
-            <p>${work.year}</p>
-        </div>
-    `).join("");
+    const photo = authorPhoto(author);
 
-    document.getElementById("authorContent").innerHTML = `
+    return `
+
+        <article class="author-card">
+
+            <div
+                class="portrait"
+                onclick="openAuthor(${id})"
+                style="cursor:pointer"
+                title="Открыть страницу автора"
+            >
+
+                <img
+                    src="${escapeHTML(photo)}"
+                    alt="${escapeHTML(author.name)}"
+                    loading="lazy"
+                    onerror="
+                        this.style.display='none';
+                        this.parentElement.textContent='${escapeHTML(initials)}';
+                    "
+                >
+
+            </div>
+
+            <h3>
+                ${escapeHTML(author.name)}
+            </h3>
+
+            <p class="years">
+                ${escapeHTML(author.years || "")}
+            </p>
+
+            <div class="card-actions">
+
+                <button
+                    class="card-favorite ${saved ? "selected" : ""}"
+                    onclick="toggleAuthorFavorite(${id})"
+                    aria-label="Добавить автора в избранное"
+                    title="Избранное"
+                >
+                    ${saved ? "★" : "☆"}
+                </button>
+
+            </div>
+
+        </article>
+
+    `;
+
+}
+
+
+/* =========================================
+   8. ФИЛЬТРЫ КАТЕГОРИЙ
+========================================= */
+
+function setCategory(category, button) {
+
+    currentCategory = category;
+
+    document
+        .querySelectorAll("#categoryFilters .category")
+        .forEach(element => {
+
+            element.classList.remove("active");
+
+        });
+
+    if (button) {
+
+        button.classList.add("active");
+
+    }
+
+    if ($("searchInput").value.trim()) {
+
+        $("searchInput").value = "";
+
+    }
+
+    $("searchSection").hidden = true;
+
+    renderAuthors();
+
+}
+
+
+/* =========================================
+   9. ОТОБРАЖЕНИЕ КАТАЛОГА
+========================================= */
+
+function renderAuthors() {
+
+    const groups = {
+
+        russian: authors.filter(author =>
+            categoryKey(author) === "russian"
+        ),
+
+        foreign: authors.filter(author =>
+            categoryKey(author) === "foreign"
+        ),
+
+        children: authors.filter(author =>
+            categoryKey(author) === "children"
+        )
+
+    };
+
+    $("russianAuthors").innerHTML =
+        groups.russian.map(authorCard).join("") ||
+        '<p class="empty">Пока нет авторов в этом разделе.</p>';
+
+    $("foreignAuthors").innerHTML =
+        groups.foreign.map(authorCard).join("") ||
+        '<p class="empty">Пока нет авторов в этом разделе.</p>';
+
+    $("childrenAuthors").innerHTML =
+        groups.children.map(authorCard).join("") ||
+        '<p class="empty">Пока нет авторов в этом разделе.</p>';
+
+    $("sectionRussian").hidden =
+        currentCategory !== "all" &&
+        currentCategory !== "russian";
+
+    $("sectionForeign").hidden =
+        currentCategory !== "all" &&
+        currentCategory !== "foreign";
+
+    $("sectionChildren").hidden =
+        currentCategory !== "all" &&
+        currentCategory !== "children";
+
+    $("catalogLoading").hidden = true;
+
+    $("catalogError").hidden = true;
+
+    $("categorySections").hidden = false;
+
+}
+
+
+/* =========================================
+   10. ЗАПАСНОЙ КАТАЛОГ
+========================================= */
+
+function createFallbackCatalog() {
+
+    const fallback = [
+
+        [
+            1,
+            "Александр Пушкин",
+            "1799–1837",
+            "russian",
+            "Капитанская дочка",
+            "pushkin"
+        ],
+
+        [
+            2,
+            "Лев Толстой",
+            "1828–1910",
+            "russian",
+            "Кавказский пленник",
+            "tolstoy"
+        ],
+
+        [
+            3,
+            "Антон Чехов",
+            "1860–1904",
+            "russian",
+            "Хамелеон",
+            "chekhov"
+        ],
+
+        [
+            4,
+            "Николай Гоголь",
+            "1809–1852",
+            "russian",
+            "Шинель",
+            "gogol"
+        ],
+
+        [
+            5,
+            "Михаил Лермонтов",
+            "1814–1841",
+            "russian",
+            "Мцыри",
+            "lermontov"
+        ],
+
+        [
+            6,
+            "Николай Носов",
+            "1908–1976",
+            "children",
+            "Фантазёры",
+            "nosov"
+        ],
+
+        [
+            7,
+            "Корней Чуковский",
+            "1882–1969",
+            "children",
+            "Мойдодыр",
+            "chukovsky"
+        ],
+
+        [
+            8,
+            "Астрид Линдгрен",
+            "1907–2002",
+            "children",
+            "Малыш и Карлсон",
+            "lindgren"
+        ],
+
+        [
+            9,
+            "Марк Твен",
+            "1835–1910",
+            "foreign",
+            "Приключения Тома Сойера",
+            "twain"
+        ],
+
+        [
+            10,
+            "Жюль Верн",
+            "1828–1905",
+            "foreign",
+            "Двадцать тысяч лье под водой",
+            "verne"
+        ],
+
+        [
+            11,
+            "Антуан де Сент-Экзюпери",
+            "1900–1944",
+            "foreign",
+            "Маленький принц",
+            "exupery"
+        ],
+
+        [
+            12,
+            "Даниэль Дефо",
+            "ок. 1660–1731",
+            "foreign",
+            "Робинзон Крузо",
+            "defoe"
+        ]
+
+    ];
+
+    return fallback.map(([id, name, years, category, title, photo]) => ({
+
+        id,
+
+        name,
+
+        years,
+
+        category,
+
+        photo: `images/${photo}.jpg`,
+
+        categories: [
+
+            category === "russian"
+                ? "Русская литература"
+                : category === "foreign"
+                    ? "Зарубежная литература"
+                    : "Детская литература"
+
+        ],
+
+        bio: "Подробная биография загружается из базы знаний сайта.",
+
+        facts: [],
+
+        works: [
+
+            {
+
+                title,
+
+                summary: "Пересказ появится после подключения базы знаний сайта.",
+
+                full: "Полный пересказ загружается из базы знаний сайта.",
+
+                characters: [],
+
+                theme: "",
+
+                idea: "",
+
+                problems: []
+
+            }
+
+        ]
+
+    }));
+
+}
+
+
+/* =========================================
+   11. ЗАГРУЗКА КАТАЛОГА С СЕРВЕРА
+========================================= */
+
+async function loadCatalog() {
+
+    try {
+
+        const response = await fetch("/api/catalog");
+
+        if (!response.ok) {
+
+            throw new Error(
+                `Сервер каталога ответил: ${response.status}`
+            );
+
+        }
+
+        const data = await response.json();
+
+        if (!data || !Array.isArray(data.authors)) {
+
+            throw new Error(
+                "Сервер вернул каталог в неожиданном формате."
+            );
+
+        }
+
+        authors = data.authors;
+
+        renderAuthors();
+
+        if ($("favorites").classList.contains("active")) {
+
+            renderFavorites();
+
+        }
+
+    } catch (error) {
+
+        console.error("Ошибка загрузки каталога:", error);
+
+        authors = createFallbackCatalog();
+
+        renderAuthors();
+
+        $("catalogError").hidden = false;
+
+        $("catalogError").textContent =
+            "Не удалось подключиться к серверу каталога. " +
+            "Показан резервный список авторов. " +
+            "Для загрузки полного каталога запусти server.js. " +
+            "Подробности: " + error.message;
+
+    }
+
+}
+
+
+/* =========================================
+   12. ПОИСК АВТОРОВ И ПРОИЗВЕДЕНИЙ
+========================================= */
+
+function searchAuthors() {
+
+    const query = normalize($("searchInput").value);
+
+    if (!query) {
+
+        $("categorySections").hidden = false;
+
+        $("searchSection").hidden = true;
+
+        renderAuthors();
+
+        return;
+
+    }
+
+    $("categorySections").hidden = true;
+
+    $("searchSection").hidden = false;
+
+    const results = authors.filter(author => {
+
+        const authorText = normalize(
+
+            (author.name || "") + " " +
+
+            (author.bio || "") + " " +
+
+            (author.years || "") + " " +
+
+            (author.country || "")
+
+        );
+
+        const worksText = getAuthorWorks(author)
+
+            .map(work => normalize(
+
+                getWorkTitle(work) + " " +
+
+                (work.aliases || []).join(" ") + " " +
+
+                (work.genre || "")
+
+            ))
+
+            .join(" ");
+
+        return (
+
+            authorText.includes(query) ||
+
+            worksText.includes(query)
+
+        );
+
+    });
+
+    $("searchResults").innerHTML =
+        results.map(authorCard).join("");
+
+    $("noResults").hidden = results.length > 0;
+
+}
+
+
+/* =========================================
+   13. ОТКРЫТИЕ СТРАНИЦЫ АВТОРА
+========================================= */
+
+function openAuthor(id) {
+
+    currentAuthor = authors.find(author =>
+        Number(author.id) === Number(id)
+    );
+
+    if (!currentAuthor) {
+
+        return;
+
+    }
+
+    const facts = Array.isArray(currentAuthor.facts)
+        ? currentAuthor.facts
+        : [];
+
+    const works = getAuthorWorks(currentAuthor);
+
+    const categories = Array.isArray(currentAuthor.categories)
+        ? currentAuthor.categories
+        : [];
+
+    const photo = authorPhoto(currentAuthor);
+
+    $("authorContent").innerHTML = `
+
         <div class="author-profile">
+
             <img
-                src="${currentAuthor.photo}"
-                alt="${currentAuthor.name}"
-                onerror="this.alt='Фотография не найдена'; this.style.objectFit='contain'"
+                src="${escapeHTML(photo)}"
+                alt="${escapeHTML(currentAuthor.name)}"
+                onerror="
+                    this.style.objectFit='contain';
+                    this.alt='Фотография автора недоступна';
+                "
             >
 
             <div>
-                <h1>${currentAuthor.name}</h1>
-                <p>${currentAuthor.years}</p>
-                <p>${currentAuthor.bio}</p>
 
-                <div>
-                    ${currentAuthor.categories.map(c =>
-                        `<span class="category-label">${c}</span>`
-                    ).join("")}
-                </div>
+                <h1>
+                    ${escapeHTML(currentAuthor.name)}
+                </h1>
+
+                <p class="muted">
+
+                    ${escapeHTML(currentAuthor.years || "")}
+
+                    ${
+                        currentAuthor.country
+                            ? " · " + escapeHTML(currentAuthor.country)
+                            : ""
+                    }
+
+                </p>
+
+                <p>
+                    ${escapeHTML(
+                        currentAuthor.bio ||
+                        "Биография пока не добавлена."
+                    )}
+                </p>
+
+                ${categories.map(category => `
+
+                    <span class="category-label">
+                        ${escapeHTML(category)}
+                    </span>
+
+                `).join("")}
+
+                <button
+                    class="favorite-button ${
+                        getFavoriteAuthors().includes(
+                            Number(currentAuthor.id)
+                        )
+                            ? "saved"
+                            : ""
+                    }"
+                    onclick="toggleAuthorFavorite(${Number(currentAuthor.id)})"
+                >
+                    ${
+                        getFavoriteAuthors().includes(
+                            Number(currentAuthor.id)
+                        )
+                            ? "♥ В избранном"
+                            : "♡ Добавить автора в избранное"
+                    }
+                </button>
+
             </div>
+
         </div>
 
-        <div class="content-block">
-            <h2>Интересные факты</h2>
-            <ul>${facts}</ul>
-        </div>
+        ${
+            facts.length
+                ? `
+
+                    <div class="content-block">
+
+                        <h2>Интересные факты</h2>
+
+                        <ul>
+
+                            ${facts.map(fact => `
+
+                                <li>
+                                    ${escapeHTML(fact)}
+                                </li>
+
+                            `).join("")}
+
+                        </ul>
+
+                    </div>
+
+                `
+                : ""
+        }
 
         <div class="content-block">
+
             <h2>Произведения</h2>
-            <div class="work-list">${works}</div>
+
+            <div class="work-list">
+
+                ${
+                    works.map((work, index) => `
+
+                        <div
+                            class="work-item"
+                            onclick="openWork(
+                                ${Number(currentAuthor.id)},
+                                ${index}
+                            )"
+                        >
+
+                            <h3>
+                                ${escapeHTML(work.title)}
+                            </h3>
+
+                            <p>
+                                ${escapeHTML(
+                                    work.years ||
+                                    work.year ||
+                                    work.genre ||
+                                    ""
+                                )}
+                            </p>
+
+                        </div>
+
+                    `).join("") ||
+                    '<p class="empty">Произведения пока не добавлены.</p>'
+                }
+
+            </div>
+
         </div>
+
     `;
 
     showPage("authorPage");
+
 }
 
 
-// СТРАНИЦА ПРОИЗВЕДЕНИЯ
+/* =========================================
+   14. ВОЗВРАТ К АВТОРУ
+========================================= */
 
-function openWork(authorId, workIndex) {
-    currentAuthor = authors.find(author => author.id === authorId);
+function goBackToAuthor() {
 
-    if (!currentAuthor) return;
+    if (currentAuthor) {
 
-    currentWork = currentAuthor.works[workIndex];
+        openAuthor(currentAuthor.id);
 
-    if (!currentWork) return;
+    } else {
+
+        showPage("home");
+
+    }
+
+}
+
+
+/* =========================================
+   15. ОТКРЫТИЕ ПРОИЗВЕДЕНИЯ
+========================================= */
+
+function openWork(authorId, index) {
+
+    currentAuthor = authors.find(author =>
+        Number(author.id) === Number(authorId)
+    );
+
+    if (!currentAuthor) {
+
+        return;
+
+    }
+
+    const works = getAuthorWorks(currentAuthor);
+
+    currentWork = works[index];
+
+    if (!currentWork) {
+
+        return;
+
+    }
 
     currentTab = "short";
 
     renderWork();
+
     showPage("workPage");
+
 }
 
 
-// ПРОВЕРКА ИЗБРАННОГО
+/* =========================================
+   16. ИЗБРАННЫЕ ПРОИЗВЕДЕНИЯ
+========================================= */
 
-function isFavorite() {
-    const favorites =
-        JSON.parse(localStorage.getItem("favorites") || "[]");
+function getFavorites() {
 
-    return favorites.some(item =>
-        item.authorId === currentAuthor.id &&
-        item.workTitle === currentWork.title
-    );
-}
+    try {
 
-
-// ДОБАВЛЕНИЕ И УДАЛЕНИЕ ИЗБРАННОГО
-
-function toggleFavorite() {
-    let favorites =
-        JSON.parse(localStorage.getItem("favorites") || "[]");
-
-    if (isFavorite()) {
-        favorites = favorites.filter(item =>
-            !(item.authorId === currentAuthor.id &&
-              item.workTitle === currentWork.title)
+        const saved = JSON.parse(
+            localStorage.getItem("favorites") || "[]"
         );
-    } else {
-        favorites.push({
-            authorId: currentAuthor.id,
-            workTitle: currentWork.title
-        });
+
+        return Array.isArray(saved) ? saved : [];
+
+    } catch (error) {
+
+        return [];
+
     }
 
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-
-    renderWork();
 }
 
 
-// ОТОБРАЖЕНИЕ ПРОИЗВЕДЕНИЯ
+function isFavorite() {
+
+    if (!currentAuthor || !currentWork) {
+
+        return false;
+
+    }
+
+    return getFavorites().some(item => (
+
+        Number(item.authorId) === Number(currentAuthor.id) &&
+
+        item.workTitle === currentWork.title
+
+    ));
+
+}
+
+
+function toggleFavorite() {
+
+    if (!currentAuthor || !currentWork) {
+
+        return;
+
+    }
+
+    let favorites = getFavorites();
+
+    if (isFavorite()) {
+
+        favorites = favorites.filter(item => !(
+
+            Number(item.authorId) === Number(currentAuthor.id) &&
+
+            item.workTitle === currentWork.title
+
+        ));
+
+    } else {
+
+        favorites.push({
+
+            authorId: currentAuthor.id,
+
+            workTitle: currentWork.title
+
+        });
+
+    }
+
+    try {
+
+        localStorage.setItem(
+            "favorites",
+            JSON.stringify(favorites)
+        );
+
+    } catch (error) {
+
+        console.error("Не удалось сохранить произведение:", error);
+
+    }
+
+    renderWork();
+
+}
+
+
+/* =========================================
+   17. ОТОБРАЖЕНИЕ ПЕРЕСКАЗА И АНАЛИЗА
+========================================= */
 
 function renderWork() {
+
+    if (!currentAuthor || !currentWork) {
+
+        return;
+
+    }
+
     const favorite = isFavorite();
+
+    const summary = safeText(
+
+        currentWork.summary,
+
+        safeText(
+            currentWork.short,
+            "Краткий пересказ пока не добавлен в базу знаний."
+        )
+
+    );
+
+    const full = safeText(
+
+        currentWork.full,
+
+        summary
+
+    );
+
+    let characters = "";
+
+    if (Array.isArray(currentWork.characters)) {
+
+        characters = currentWork.characters.map(character => {
+
+            if (typeof character === "string") {
+
+                return character;
+
+            }
+
+            return (
+
+                safeText(character.name, "Герой") +
+
+                ": " +
+
+                safeText(character.description, "")
+
+            );
+
+        }).join("\n");
+
+    } else {
+
+        characters = safeText(
+
+            currentWork.characters,
+
+            "Информация о героях пока не добавлена."
+
+        );
+
+    }
+
+    let problems = "";
+
+    if (Array.isArray(currentWork.problems)) {
+
+        problems = currentWork.problems.join(", ");
+
+    } else {
+
+        problems = safeText(
+            currentWork.problems,
+            "Пока не указана."
+        );
+
+    }
 
     let content = "";
 
     if (currentTab === "short") {
-        content = `<p>${currentWork.short}</p>`;
+
+        content = `
+
+            <h2>Краткий пересказ</h2>
+
+            <p>${escapeHTML(summary)}</p>
+
+        `;
+
     }
 
     if (currentTab === "full") {
-        content = `<p>${currentWork.full}</p>`;
+
+        content = `
+
+            <h2>Полный пересказ</h2>
+
+            <p>${escapeHTML(full)}</p>
+
+        `;
+
     }
 
     if (currentTab === "analysis") {
-        content = `
-            <h2>Герои и характеристики</h2>
-            <p>${currentWork.characters}</p>
 
-            <h2>Тема</h2>
-            <p>${currentWork.theme}</p>
+        content = `
+
+            <h2>Герои и характеристики</h2>
+
+            <p>
+                ${escapeHTML(
+                    characters ||
+                    "Информация о героях пока не добавлена."
+                )}
+            </p>
+
+            <h2>Тема произведения</h2>
+
+            <p>
+                ${escapeHTML(
+                    currentWork.theme ||
+                    "Пока не указана."
+                )}
+            </p>
 
             <h2>Главная мысль</h2>
-            <p>${currentWork.idea}</p>
+
+            <p>
+                ${escapeHTML(
+                    currentWork.idea ||
+                    "Пока не указана."
+                )}
+            </p>
 
             <h2>Проблематика</h2>
-            <p>${currentWork.problems}</p>
+
+            <p>
+                ${escapeHTML(problems)}
+            </p>
+
         `;
+
     }
 
-    document.getElementById("workContent").innerHTML = `
-        <div class="work-header">
-            <h1>${currentWork.title}</h1>
-            <p>Автор: ${currentAuthor.name}</p>
-            <p>Год: ${currentWork.year}</p>
+    $("workContent").innerHTML = `
 
-            <button class="favorite-button ${favorite ? "saved" : ""}"
-                    onclick="toggleFavorite()">
-                ${favorite ? "♥ В избранном" : "♡ Добавить в избранное"}
+        <div class="work-header">
+
+            <h1>
+                ${escapeHTML(currentWork.title)}
+            </h1>
+
+            <p>
+                Автор:
+                ${escapeHTML(currentAuthor.name)}
+            </p>
+
+            <p>
+                Год:
+                ${escapeHTML(
+                    currentWork.years ||
+                    currentWork.year ||
+                    "не указан"
+                )}
+
+                ·
+
+                ${escapeHTML(currentWork.genre || "")}
+            </p>
+
+            <button
+                class="favorite-button ${
+                    favorite ? "saved" : ""
+                }"
+                onclick="toggleFavorite()"
+            >
+
+                ${
+                    favorite
+                        ? "♥ В избранном"
+                        : "♡ Добавить в избранное"
+                }
+
             </button>
+
         </div>
 
         <div class="tabs">
-            <button class="tab ${currentTab === "short" ? "active" : ""}"
-                    onclick="changeTab('short')">
+
+            <button
+                class="tab ${
+                    currentTab === "short" ? "active" : ""
+                }"
+                onclick="changeTab('short')"
+            >
                 Краткий пересказ
             </button>
 
-            <button class="tab ${currentTab === "full" ? "active" : ""}"
-                    onclick="changeTab('full')">
+            <button
+                class="tab ${
+                    currentTab === "full" ? "active" : ""
+                }"
+                onclick="changeTab('full')"
+            >
                 Полный пересказ
             </button>
 
-            <button class="tab ${currentTab === "analysis" ? "active" : ""}"
-                    onclick="changeTab('analysis')">
+            <button
+                class="tab ${
+                    currentTab === "analysis" ? "active" : ""
+                }"
+                onclick="changeTab('analysis')"
+            >
                 Анализ
             </button>
+
         </div>
 
-        <div class="content-block">${content}</div>
+        <div class="content-block">
+
+            ${content}
+
+        </div>
+
     `;
+
 }
 
 
-// ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
+/* =========================================
+   18. ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
+========================================= */
 
 function changeTab(tab) {
+
     currentTab = tab;
+
     renderWork();
+
 }
 
 
-// СТРАНИЦА ИЗБРАННОГО
+/* =========================================
+   19. СТРАНИЦА ИЗБРАННОГО
+========================================= */
 
 function renderFavorites() {
-    const favorites =
-        JSON.parse(localStorage.getItem("favorites") || "[]");
 
-    if (!favorites.length) {
-        document.getElementById("favoritesContent").innerHTML =
-            '<p class="empty">Пока здесь ничего нет. Добавляй произведения в избранное!</p>';
-        return;
+    const savedAuthorIds = getFavoriteAuthors();
+
+    const authorCards = authors
+
+        .filter(author =>
+            savedAuthorIds.includes(Number(author.id))
+        )
+
+        .map(authorCard);
+
+    const savedWorks = getFavorites();
+
+    const workItems = savedWorks.map(item => {
+
+        const author = authors.find(author =>
+            Number(author.id) === Number(item.authorId)
+        );
+
+        if (!author) {
+
+            return "";
+
+        }
+
+        const works = getAuthorWorks(author);
+
+        const index = works.findIndex(work =>
+            work.title === item.workTitle
+        );
+
+        if (index < 0) {
+
+            return "";
+
+        }
+
+        return `
+
+            <div
+                class="work-item"
+                onclick="openWork(
+                    ${Number(author.id)},
+                    ${index}
+                )"
+            >
+
+                <h3>
+                    ${escapeHTML(item.workTitle)}
+                </h3>
+
+                <p>
+                    ${escapeHTML(author.name)}
+                </p>
+
+            </div>
+
+        `;
+
+    }).filter(Boolean);
+
+    const sections = [];
+
+    if (authorCards.length) {
+
+        sections.push(`
+
+            <h2 class="section-title">
+                Избранные авторы
+            </h2>
+
+            <div class="author-grid">
+
+                ${authorCards.join("")}
+
+            </div>
+
+        `);
+
     }
 
-    document.getElementById("favoritesContent").innerHTML =
-        favorites.map(item => {
-            const author = authors.find(a => a.id === item.authorId);
+    if (workItems.length) {
 
-            if (!author) return "";
+        sections.push(`
 
-            const workIndex = author.works.findIndex(
-                w => w.title === item.workTitle
-            );
+            <h2 class="section-title">
+                Избранные произведения
+            </h2>
 
-            if (workIndex < 0) return "";
+            <div class="work-list">
 
-            return `
-                <div class="work-item"
-                     onclick="openWork(${author.id}, ${workIndex})">
-                    <h3>${item.workTitle}</h3>
-                    <p>${author.name}</p>
-                </div>
-            `;
-        }).join("");
+                ${workItems.join("")}
+
+            </div>
+
+        `);
+
+    }
+
+    $("favoritesContent").innerHTML = sections.length
+
+        ? sections.join("")
+
+        : `
+
+            <p class="empty">
+                Пока здесь ничего нет.
+                Добавляй авторов и произведения в избранное!
+            </p>
+
+        `;
+
 }
 
 
-// ЗАЩИТА ТЕКСТА В ЧАТЕ
+/* =========================================
+   20. ДОБАВЛЕНИЕ СООБЩЕНИЙ В ЧАТ
+========================================= */
 
-function escapeHTML(text) {
-    return text.replace(/[&<>"']/g, character => ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#039;"
-    })[character]);
+function addMessage(role, text) {
+
+    const messages = $("chatMessages");
+
+    const bubble = document.createElement("div");
+
+    bubble.className =
+        `message ${role === "user" ? "user" : "bot"}`;
+
+    const sender = document.createElement("div");
+
+    sender.className = "sender";
+
+    sender.textContent =
+        role === "user" ? "ВЫ" : "Литера";
+
+    const body = document.createElement("div");
+
+    body.className = "message-text";
+
+    body.textContent = text;
+
+    bubble.append(sender, body);
+
+    messages.appendChild(bubble);
+
+    messages.scrollTop = messages.scrollHeight;
+
 }
 
 
-// ОТПРАВКА СООБЩЕНИЯ
+/* =========================================
+   21. БЫСТРЫЕ ВОПРОСЫ
+========================================= */
 
-function sendMessage() {
-    const input = document.getElementById("chatInput");
-    const messageText = input.value.trim();
+function usePrompt(text) {
 
-    if (!messageText) return;
+    $("chatInput").value = text;
 
-    const messages = document.getElementById("chatMessages");
+    $("chatInput").focus();
 
-    messages.innerHTML += `
-        <div class="message user">${escapeHTML(messageText)}</div>
-    `;
+}
+
+
+/* =========================================
+   22. ОЧИСТКА ЧАТА
+========================================= */
+
+function clearChat() {
+
+    if (isSending) {
+
+        return;
+
+    }
+
+    chatHistory = [];
+
+    $("chatMessages").innerHTML = "";
+
+    addMessage(
+        "assistant",
+        "Чат очищен. Можем начать новую тему!"
+    );
+
+    $("chatInput").focus();
+
+}
+
+
+/* =========================================
+   23. ОТПРАВКА СООБЩЕНИЯ Литера
+========================================= */
+
+async function sendMessage(event) {
+
+    if (event) {
+
+        event.preventDefault();
+
+    }
+
+    if (isSending) {
+
+        return;
+
+    }
+
+    const input = $("chatInput");
+
+    const message = input.value.trim();
+
+    if (!message) {
+
+        return;
+
+    }
+
+    isSending = true;
 
     input.value = "";
 
-    const answer = getBotAnswer(messageText);
+    $("sendButton").disabled = true;
 
-    messages.innerHTML += `
-        <div class="message bot">${escapeHTML(answer)}</div>
-    `;
+    $("sendButton").textContent = "Отправка…";
 
-    messages.scrollTop = messages.scrollHeight;
+    addMessage("user", message);
+
+    chatHistory.push({
+
+        role: "user",
+
+        content: message
+
+    });
+
+    $("typingIndicator").hidden = false;
+
+    $("chatMessages").scrollTop =
+        $("chatMessages").scrollHeight;
+
+    try {
+
+        const response = await fetch("/api/chat", {
+
+            method: "POST",
+
+            headers: {
+
+                "Content-Type": "application/json"
+
+            },
+
+            body: JSON.stringify({
+
+                message: message,
+
+                history: chatHistory.slice(-12)
+
+            })
+
+        });
+
+        const data = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+
+            throw new Error(
+
+                data.error ||
+
+                data.reply ||
+
+                `Ошибка сервера: ${response.status}`
+
+            );
+
+        }
+
+        const reply = safeText(
+
+            data.reply,
+
+            "Не удалось получить ответ. Попробуй ещё раз."
+
+        );
+
+        addMessage("assistant", reply);
+
+        chatHistory.push({
+
+            role: "assistant",
+
+            content: reply
+
+        });
+
+        if (chatHistory.length > 20) {
+
+            chatHistory = chatHistory.slice(-20);
+
+        }
+
+    } catch (error) {
+
+        console.error("Ошибка Литера:", error);
+
+        const errorText =
+
+            "Не получилось связаться с помощником. " +
+
+            "Проверь, что сервер запущен. " +
+
+            "Подробности: " +
+
+            error.message;
+
+        addMessage("assistant", errorText);
+
+        chatHistory.pop();
+
+    } finally {
+
+        $("typingIndicator").hidden = true;
+
+        $("sendButton").disabled = false;
+
+        $("sendButton").textContent = "Отправить";
+
+        isSending = false;
+
+        input.focus();
+
+    }
+
 }
 
 
-// ОТВЕТЫ ПОМОЩНИКА «ЛИТЕРА»
+/* =========================================
+   24. ОБРАБОТКА ФОРМЫ ЧАТА
+========================================= */
 
-function getBotAnswer(question) {
-    const q = question.toLowerCase();
+$("chatForm").addEventListener(
+    "submit",
+    sendMessage
+);
 
-    if (q.includes("привет")) {
-        return "Привет! Я Литера. Могу помочь тебе с литературой.";
+
+$("chatInput").addEventListener("keydown", event => {
+
+    if (
+        event.key === "Enter" &&
+        !event.shiftKey
+    ) {
+
+        event.preventDefault();
+
+        sendMessage(event);
+
     }
 
-    if (q.includes("пушкин")) {
-        return "Александр Сергеевич Пушкин — великий русский поэт. На сайте есть его произведение «Капитанская дочка».";
-    }
-
-    if (q.includes("толстой")) {
-        return "Лев Николаевич Толстой — русский писатель, автор «Войны и мира». На сайте можно прочитать о рассказе «Кавказский пленник».";
-    }
-
-    if (q.includes("чехов")) {
-        return "Антон Павлович Чехов — русский писатель и драматург. На сайте представлено его произведение «Хамелеон».";
-    }
-
-    if (q.includes("гоголь")) {
-        return "Николай Васильевич Гоголь — автор произведения «Шинель» и комедии «Ревизор».";
-    }
-
-    if (q.includes("мцыри") || q.includes("лермонтов")) {
-        return "Михаил Юрьевич Лермонтов — автор поэмы «Мцыри» и романа «Герой нашего времени».";
-    }
-
-    if (q.includes("нос") || q.includes("фантазёр")) {
-        return "Николай Носов — автор детских рассказов, в том числе «Фантазёров», и книг о Незнайке.";
-    }
-
-    if (q.includes("чук")) {
-        return "Корней Чуковский — автор детских произведений «Мойдодыр», «Айболит» и других сказок.";
-    }
-
-    if (q.includes("карлсон") || q.includes("линдгрен")) {
-        return "Астрид Линдгрен — шведская писательница, автор книги «Малыш и Карлсон».";
-    }
-
-    if (q.includes("том сойер") || q.includes("твен")) {
-        return "Марк Твен — американский писатель, автор «Приключений Тома Сойера».";
-    }
-
-    if (q.includes("верн") || q.includes("под водой")) {
-        return "Жюль Верн — французский писатель, автор приключенческого романа «Двадцать тысяч лье под водой».";
-    }
-
-    if (q.includes("маленький принц") || q.includes("экзюпери")) {
-        return "Антуан де Сент-Экзюпери — французский писатель и лётчик, автор «Маленького принца».";
-    }
-
-    if (q.includes("робинзон") || q.includes("дефо")) {
-        return "Даниэль Дефо — английский писатель, автор романа «Робинзон Крузо».";
-    }
-
-    if (q.includes("список") || q.includes("автор")) {
-        return "На главной странице сайта представлены 12 авторов. Ты можешь найти их через поиск или выбрать нужную категорию.";
-    }
-
-    return "Я пока умею отвечать только на некоторые вопросы о писателях и произведениях из каталога. Попробуй указать имя автора или название книги.";
-}
-
-
-// ОТПРАВКА СООБЩЕНИЯ КЛАВИШЕЙ ENTER
-
-document.getElementById("chatInput").addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-        sendMessage();
-    }
 });
 
 
-// ЗАПУСК САЙТА
+/* =========================================
+   25. ДОПОЛНИТЕЛЬНАЯ НАВИГАЦИЯ
+========================================= */
 
-renderAuthors();
+document.querySelector(".brand").addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "Enter" ||
+            event.key === " "
+        ) {
+
+            event.preventDefault();
+
+            showPage("home");
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   26. ЗАПУСК САЙТА
+========================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    loadCatalog();
+
+});
+
 
 </script>
 
